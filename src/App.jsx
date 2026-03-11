@@ -275,7 +275,7 @@ function Hero() {
    ───────────────────────────────────────────── */
 function SectionHeader({ number, title, align = 'left' }) {
   return (
-    <Reveal style={{ marginBottom: 56, textAlign: align }}>
+    <Reveal style={{ marginBottom: 32, textAlign: align }}>
       <span style={{
         fontFamily: T.mono, fontSize: 12, color: T.accent,
         letterSpacing: '0.1em', textTransform: 'uppercase',
@@ -298,46 +298,32 @@ function SectionHeader({ number, title, align = 'left' }) {
 function About() {
   return (
     <section id="about" style={{
-      padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
+      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
       maxWidth: 1200, margin: '0 auto',
     }}>
       <SectionHeader number="01" title="About" />
       <div style={{
         display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
-        gap: 'clamp(32px, 5vw, 80px)', alignItems: 'start',
+        gap: 'clamp(24px, 4vw, 48px)', alignItems: 'start',
       }}>
         <Reveal delay={0.1}>
           <p style={{
             fontFamily: T.serif, fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 30px)',
             color: T.ink, lineHeight: 1.45, letterSpacing: '-0.01em',
           }}>
-            I build software that solves real problems — from restaurant websites
-            to AI-powered options flow analysis.
+            I build software that solves real problems — from idea to production.
           </p>
         </Reveal>
         <div>
           <Reveal delay={0.2}>
             <p style={{
               fontFamily: T.sans, fontSize: 16, lineHeight: 1.75, color: T.inkSoft, fontWeight: 300,
-              marginBottom: 24,
             }}>
-              I work across the full stack with Java, TypeScript, and Python. My projects
-              range from Spring Boot backends and Angular frontends to async data collectors
-              processing thousands of options trades in real-time. I enjoy turning complex
-              ideas into clean, working software.
+              Full-stack engineer who enjoys working across the entire stack — backends,
+              frontends, data pipelines, and infrastructure. I care about writing clean,
+              maintainable code and shipping things that people actually use.
             </p>
           </Reveal>
-          <Reveal delay={0.3}>
-            <p style={{
-              fontFamily: T.sans, fontSize: 16, lineHeight: 1.75, color: T.inkSoft, fontWeight: 300,
-              marginBottom: 24,
-            }}>
-              When I'm not coding, I'm tinkering with home automation on my Raspberry Pi,
-              analyzing options flow data, or planning trips to Iceland. I believe great
-              software comes from curiosity and building things you actually want to use.
-            </p>
-          </Reveal>
-          {/* Stats removed */}
         </div>
       </div>
     </section>
@@ -373,7 +359,7 @@ const skillsData = [
 function Skills() {
   return (
     <section id="tech stack" style={{
-      padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
+      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
       background: T.bgAlt, position: 'relative',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -386,7 +372,7 @@ function Skills() {
           {skillsData.map((group, gi) => (
             <Reveal key={group.category} delay={gi * 0.12} style={{ height: '100%' }}>
               <div style={{
-                background: T.surface, padding: 'clamp(28px, 3vw, 40px)',
+                background: T.surface, padding: 'clamp(20px, 2.5vw, 28px)',
                 border: `1px solid ${T.rule}`,
                 position: 'relative', overflow: 'hidden', height: '100%',
                 display: 'flex', flexDirection: 'column',
@@ -494,7 +480,7 @@ const projectsData = [
 function Projects() {
   return (
     <section id="projects" style={{
-      padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
+      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
       maxWidth: 1200, margin: '0 auto',
     }}>
       <SectionHeader number="03" title="Projects" />
@@ -524,7 +510,7 @@ function Projects() {
             >
               {/* Color band header */}
               <div style={{
-                background: p.color, padding: '40px 32px 36px',
+                background: p.color, padding: '28px 28px 24px',
                 position: 'relative', overflow: 'hidden',
               }}>
                 <span style={{
@@ -544,7 +530,7 @@ function Projects() {
 
               {/* Body */}
               <div style={{
-                padding: '28px 32px 32px', background: T.surface,
+                padding: '20px 28px 24px', background: T.surface,
                 flex: 1, display: 'flex', flexDirection: 'column',
               }}>
                 <p style={{
@@ -592,7 +578,7 @@ function Projects() {
 function Contact() {
   return (
     <section id="contact" style={{
-      padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
+      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
       maxWidth: 1200, margin: '0 auto', textAlign: 'center',
     }}>
       <SectionHeader number="04" title="Get in Touch" align="center" />
@@ -600,7 +586,7 @@ function Contact() {
       <Reveal delay={0.1}>
         <p style={{
           fontFamily: T.serif, fontStyle: 'italic', fontSize: 'clamp(20px, 3vw, 28px)',
-          color: T.ink, lineHeight: 1.5, maxWidth: 560, margin: '0 auto 48px',
+          color: T.ink, lineHeight: 1.5, maxWidth: 560, margin: '0 auto 28px',
           letterSpacing: '-0.01em',
         }}>
           Always open to interesting conversations, collaborations, or just a good tech debate.
@@ -622,7 +608,7 @@ function Contact() {
 
       <Reveal delay={0.3}>
         <div style={{
-          display: 'flex', justifyContent: 'center', gap: 32, marginTop: 48,
+          display: 'flex', justifyContent: 'center', gap: 32, marginTop: 28,
         }}>
           {[
             { label: 'GitHub', href: 'https://github.com/TheLoop705' },
@@ -656,7 +642,7 @@ function Contact() {
 function Footer() {
   return (
     <footer style={{
-      padding: '40px clamp(24px, 5vw, 80px)',
+      padding: '24px clamp(24px, 5vw, 80px)',
       borderTop: `1px solid ${T.rule}`,
     }}>
       <div style={{
