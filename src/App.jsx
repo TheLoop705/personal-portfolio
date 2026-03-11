@@ -95,7 +95,7 @@ function Nav() {
     return () => window.removeEventListener('scroll', h);
   }, []);
 
-  const links = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
+  const links = ['About', 'Tech Stack', 'Projects', 'Contact'];
 
   const scrollTo = useCallback((id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -119,7 +119,7 @@ function Nav() {
         <button onClick={() => scrollTo('hero')} style={{
           background: 'none', border: 'none', cursor: 'pointer', padding: 0,
           fontFamily: T.serif, fontSize: 22, color: T.ink, letterSpacing: '-0.02em',
-        }}>S.</button>
+        }}>SD.</button>
 
         {/* Desktop links */}
         <div style={{
@@ -201,7 +201,7 @@ function Hero() {
         <span style={{
           fontFamily: T.mono, fontSize: 13, color: T.accent,
           letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 500,
-        }}>Software Engineer & Tech Lead</span>
+        }}>Software Engineer</span>
       </div>
 
       <h1 style={{
@@ -210,7 +210,7 @@ function Hero() {
         letterSpacing: '-0.03em', margin: '24px 0 0',
         ...anim(0.25),
       }}>
-        Sultan
+        Sultan Dayani
       </h1>
 
       <div style={{
@@ -223,8 +223,8 @@ function Hero() {
         color: T.inkSoft, maxWidth: 540, fontWeight: 300,
         ...anim(0.5),
       }}>
-        Building resilient systems at the intersection of cloud infrastructure,
-        microservices, and thoughtful engineering.
+        Building full-stack applications and data pipelines — from Spring Boot
+        microservices to AI-powered automation tools.
       </p>
 
       <div style={{ marginTop: 48, display: 'flex', gap: 16, flexWrap: 'wrap', ...anim(0.65) }}>
@@ -311,8 +311,8 @@ function About() {
             fontFamily: T.serif, fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 30px)',
             color: T.ink, lineHeight: 1.45, letterSpacing: '-0.01em',
           }}>
-            I architect software that scales — from startup MVPs to enterprise platforms
-            processing millions of events daily.
+            I build software that solves real problems — from restaurant websites
+            to AI-powered options flow analysis.
           </p>
         </Reveal>
         <div>
@@ -321,10 +321,10 @@ function About() {
               fontFamily: T.sans, fontSize: 16, lineHeight: 1.75, color: T.inkSoft, fontWeight: 300,
               marginBottom: 24,
             }}>
-              As a Tech Lead, I work across the full stack and cloud infrastructure,
-              designing systems that are as maintainable as they are performant. My days
-              are split between writing Java and TypeScript, wrangling Kubernetes clusters,
-              and making architectural decisions that teams can build on for years.
+              I work across the full stack with Java, TypeScript, and Python. My projects
+              range from Spring Boot backends and Angular frontends to async data collectors
+              processing thousands of options trades in real-time. I enjoy turning complex
+              ideas into clean, working software.
             </p>
           </Reveal>
           <Reveal delay={0.3}>
@@ -332,29 +332,12 @@ function About() {
               fontFamily: T.sans, fontSize: 16, lineHeight: 1.75, color: T.inkSoft, fontWeight: 300,
               marginBottom: 24,
             }}>
-              Outside of work, I'm deep into cloud infrastructure experiments, tinkering
-              with home automation through Home Assistant, and occasionally losing hours
-              to retro gaming and emulation setups. I believe the best engineers are the
-              ones who never stop being curious.
+              When I'm not coding, I'm tinkering with home automation on my Raspberry Pi,
+              analyzing options flow data, or planning trips to Iceland. I believe great
+              software comes from curiosity and building things you actually want to use.
             </p>
           </Reveal>
-          <Reveal delay={0.4}>
-            <div style={{
-              display: 'flex', gap: 32, paddingTop: 16, borderTop: `1px solid ${T.rule}`,
-              flexWrap: 'wrap',
-            }}>
-              {[
-                { num: '8+', label: 'Years Experience' },
-                { num: '30+', label: 'Projects Delivered' },
-                { num: '5', label: 'Teams Led' },
-              ].map(s => (
-                <div key={s.label}>
-                  <div style={{ fontFamily: T.serif, fontSize: 36, color: T.accent, lineHeight: 1 }}>{s.num}</div>
-                  <div style={{ fontFamily: T.sans, fontSize: 12, color: T.inkMuted, marginTop: 4, letterSpacing: '0.04em', textTransform: 'uppercase' }}>{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
+          {/* Stats removed */}
         </div>
       </div>
     </section>
@@ -368,33 +351,33 @@ const skillsData = [
   {
     category: 'Backend',
     icon: '{}',
-    items: ['Java', 'Spring Boot', 'Node.js', 'REST APIs', 'GraphQL', 'Microservices'],
+    items: ['Java', 'Spring Boot', 'Python', 'FastAPI', 'Node.js', 'REST APIs'],
   },
   {
     category: 'Frontend',
     icon: '</>',
-    items: ['Angular', 'TypeScript', 'React', 'HTML/CSS', 'RxJS', 'Material UI'],
+    items: ['Angular', 'TypeScript', 'React', 'Next.js', 'HTMX', 'HTML/CSS'],
   },
   {
     category: 'Cloud & DevOps',
     icon: '>>',
-    items: ['AWS', 'Azure', 'Kubernetes', 'Docker', 'Terraform', 'CI/CD'],
+    items: ['Docker', 'Kubernetes', 'Podman', 'CI/CD', 'GitHub Actions', 'Linux'],
   },
   {
-    category: 'Databases',
+    category: 'Data & AI',
     icon: '[]',
-    items: ['PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'DynamoDB'],
+    items: ['PostgreSQL', 'MongoDB', 'OpenAI/Whisper', 'ML Pipelines', 'Async Python'],
   },
 ];
 
 function Skills() {
   return (
-    <section id="skills" style={{
+    <section id="tech stack" style={{
       padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
       background: T.bgAlt, position: 'relative',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <SectionHeader number="02" title="Skills" />
+        <SectionHeader number="02" title="Tech Stack" />
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
@@ -472,28 +455,39 @@ function Skills() {
    ───────────────────────────────────────────── */
 const projectsData = [
   {
-    title: 'CommandCenter',
-    desc: 'A personal iOS assistant app that centralizes notifications, schedules, and smart home controls into one elegant interface.',
-    tags: ['Swift', 'iOS', 'Home Assistant', 'REST API'],
-    color: '#2D5A3D',
-  },
-  {
-    title: 'OpenClaw',
-    desc: 'An AI agent platform for building, deploying, and orchestrating autonomous agents with plug-and-play tool integrations.',
-    tags: ['Java', 'Spring Boot', 'LLMs', 'Kubernetes'],
+    title: 'Options Flow Tracker',
+    desc: 'Full-stack options flow analysis platform. Async Python collectors pulling from Unusual Whales API, React dashboard with anomaly detection, FastAPI backend. 16+ data collectors running 24/7.',
+    tags: ['Python', 'FastAPI', 'React', 'Unusual Whales API', 'ML'],
     color: '#4A3B6B',
+    link: null,
   },
   {
-    title: 'MasterStack',
-    desc: 'A developer learning platform with curated paths, hands-on labs, and progress tracking for modern tech stacks.',
-    tags: ['Angular', 'Node.js', 'PostgreSQL', 'AWS'],
+    title: 'Grano Bar',
+    desc: 'Restaurant website for a local Frankfurt bar. Clean, modern design with HTMX for smooth interactivity. Lightweight and fast.',
+    tags: ['HTMX', 'Python', 'HTML/CSS', 'Web Design'],
     color: '#6B3B3B',
+    link: null,
   },
   {
-    title: 'Coming Soon',
-    desc: 'Something new is brewing. A project exploring the boundaries of edge computing and real-time data pipelines.',
-    tags: ['Kafka', 'Rust', 'Edge Computing'],
+    title: 'Spotify Insights',
+    desc: 'Next.js dashboard that analyzes your Spotify listening data. PostgreSQL backend with rich data visualizations and listening history.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Spotify API'],
+    color: '#1DB954',
+    link: null,
+  },
+  {
+    title: 'COVID QR Registration',
+    desc: 'Flutter mobile apps for QR-code based COVID contact tracing. Owner app generates scannable codes, customer app registers visits. Built during the pandemic.',
+    tags: ['Flutter', 'Dart', 'Firebase', 'Mobile'],
     color: '#3B5A6B',
+    link: 'https://github.com/TheLoop705/covid-owner-app',
+  },
+  {
+    title: 'OpenClaw Skills',
+    desc: 'Collection of AI agent skills for the OpenClaw platform: options flow intelligence, newsletter automation, Home Assistant control, and LLM memory management.',
+    tags: ['Python', 'OpenClaw', 'AI Agents', 'Automation'],
+    color: '#C4572A',
+    link: 'https://github.com/TheLoop705/openclaw-skills',
   },
 ];
 
@@ -511,7 +505,7 @@ function Projects() {
       }}>
         {projectsData.map((p, i) => (
           <Reveal key={p.title} delay={i * 0.1} style={{ height: '100%' }}>
-            <a href="#!" style={{
+            <a href={p.link || '#!'} target={p.link ? '_blank' : undefined} rel={p.link ? 'noopener noreferrer' : undefined} style={{
               display: 'flex', flexDirection: 'column',
               border: `1px solid ${T.rule}`, overflow: 'hidden',
               textDecoration: 'none', color: 'inherit', height: '100%',
@@ -576,7 +570,7 @@ function Projects() {
                   marginTop: 16, fontFamily: T.sans, fontSize: 13,
                   fontWeight: 500, color: T.accent,
                 }}>
-                  {p.title === 'Coming Soon' ? 'Stay Tuned' : 'View Project'}
+                  {p.link ? 'View on GitHub' : 'Private Project'}
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M1 7h12M8 2l5 5-5 5" />
                   </svg>
@@ -590,98 +584,7 @@ function Projects() {
   );
 }
 
-/* ─────────────────────────────────────────────
-   EXPERIENCE (timeline)
-   ───────────────────────────────────────────── */
-const experienceData = [
-  {
-    period: '2022 — Present',
-    role: 'Tech Lead',
-    company: 'Nexagen Systems',
-    desc: 'Leading a cross-functional team of 8 engineers building cloud-native microservices on AWS. Architected event-driven systems handling 2M+ events/day. Drove migration from monolith to Kubernetes.',
-  },
-  {
-    period: '2020 — 2022',
-    role: 'Senior Software Engineer',
-    company: 'Vantage Digital',
-    desc: 'Full-stack development with Java Spring Boot and Angular. Designed CI/CD pipelines, implemented service mesh with Istio, and mentored junior developers across two product teams.',
-  },
-  {
-    period: '2018 — 2020',
-    role: 'Software Engineer',
-    company: 'Crestline Technologies',
-    desc: 'Built REST APIs and Angular SPAs for enterprise clients. Introduced automated testing practices that reduced production bugs by 60%. First exposure to AWS and container orchestration.',
-  },
-  {
-    period: '2016 — 2018',
-    role: 'Junior Developer',
-    company: 'BlueArc Solutions',
-    desc: 'Started with Java backend development and PostgreSQL. Learned the ropes of agile development, code reviews, and shipping production software on tight deadlines.',
-  },
-];
 
-function Experience() {
-  return (
-    <section id="experience" style={{
-      padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
-      background: T.bgAlt,
-    }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <SectionHeader number="04" title="Experience" />
-        <div style={{ position: 'relative' }}>
-          {/* Timeline line */}
-          <div className="timeline-line" style={{
-            position: 'absolute', left: 'clamp(4px, 1vw, 8px)', top: 0, bottom: 0,
-            width: 1, background: T.rule,
-          }} />
-
-          {experienceData.map((exp, i) => (
-            <Reveal key={i} delay={i * 0.12}>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'clamp(100px, 18vw, 200px) 1fr',
-                gap: 'clamp(24px, 4vw, 56px)',
-                paddingLeft: 'clamp(20px, 3vw, 40px)',
-                marginBottom: i < experienceData.length - 1 ? 56 : 0,
-                position: 'relative',
-              }}>
-                {/* Dot on timeline */}
-                <div style={{
-                  position: 'absolute', left: 'clamp(0px, calc(1vw - 4px), 4px)', top: 6,
-                  width: 9, height: 9, borderRadius: '50%',
-                  background: i === 0 ? T.accent : T.bg,
-                  border: `2px solid ${i === 0 ? T.accent : T.inkMuted}`,
-                }} />
-
-                <div>
-                  <span style={{
-                    fontFamily: T.mono, fontSize: 12, color: T.inkMuted,
-                    letterSpacing: '0.02em',
-                  }}>{exp.period}</span>
-                </div>
-
-                <div>
-                  <h3 style={{
-                    fontFamily: T.serif, fontSize: 'clamp(20px, 2.5vw, 26px)', fontWeight: 400,
-                    color: T.ink, margin: 0, letterSpacing: '-0.01em',
-                  }}>{exp.role}</h3>
-                  <span style={{
-                    fontFamily: T.sans, fontSize: 14, color: T.accent,
-                    fontWeight: 500, display: 'inline-block', marginTop: 4,
-                  }}>{exp.company}</span>
-                  <p style={{
-                    fontFamily: T.sans, fontSize: 15, lineHeight: 1.7,
-                    color: T.inkSoft, fontWeight: 300, marginTop: 12,
-                  }}>{exp.desc}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────────────────────────
    CONTACT
@@ -692,7 +595,7 @@ function Contact() {
       padding: 'clamp(80px, 12vh, 140px) clamp(24px, 5vw, 80px)',
       maxWidth: 1200, margin: '0 auto', textAlign: 'center',
     }}>
-      <SectionHeader number="05" title="Get in Touch" align="center" />
+      <SectionHeader number="04" title="Get in Touch" align="center" />
 
       <Reveal delay={0.1}>
         <p style={{
@@ -705,7 +608,7 @@ function Contact() {
       </Reveal>
 
       <Reveal delay={0.2}>
-        <a href="mailto:hello@sultan.dev" style={{
+        <a href="mailto:contact@sultandayani.com" style={{
           fontFamily: T.sans, fontSize: 'clamp(16px, 2vw, 20px)',
           color: T.accent, textDecoration: 'none', fontWeight: 500,
           borderBottom: `1px solid transparent`,
@@ -714,7 +617,7 @@ function Contact() {
         }}
         onMouseEnter={e => e.target.style.borderColor = T.accent}
         onMouseLeave={e => e.target.style.borderColor = 'transparent'}
-        >hello@sultan.dev</a>
+        >contact@sultandayani.com</a>
       </Reveal>
 
       <Reveal delay={0.3}>
@@ -722,8 +625,8 @@ function Contact() {
           display: 'flex', justifyContent: 'center', gap: 32, marginTop: 48,
         }}>
           {[
-            { label: 'GitHub', href: 'https://github.com/sultan' },
-            { label: 'LinkedIn', href: 'https://linkedin.com/in/sultan' },
+            { label: 'GitHub', href: 'https://github.com/TheLoop705' },
+            { label: 'LinkedIn', href: '#' },
           ].map(link => (
             <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" style={{
               fontFamily: T.mono, fontSize: 13, color: T.inkSoft,
@@ -763,7 +666,7 @@ function Footer() {
       }}>
         <span style={{
           fontFamily: T.sans, fontSize: 13, color: T.inkMuted, fontWeight: 300,
-        }}>&copy; {new Date().getFullYear()} Sultan. Crafted with intention.</span>
+        }}>&copy; {new Date().getFullYear()} Sultan Dayani. Built in Frankfurt.</span>
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{
@@ -816,7 +719,7 @@ function GlobalStyles() {
       @media (max-width: 768px) {
         .nav-desktop { display: none !important; }
         .nav-mobile-toggle { display: block !important; }
-        .timeline-line { display: none; }
+
       }
       @media (min-width: 769px) {
         .nav-mobile-menu { display: none !important; }
@@ -851,7 +754,6 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
-        <Experience />
         <Contact />
       </main>
       <Footer />
