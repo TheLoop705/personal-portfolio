@@ -32,15 +32,32 @@ describe('professional portfolio', () => {
   test('renders the safe LLM system flow and the verified Pulse link', () => {
     render(<App />);
 
-    const flowCaption = screen.getByText(/Safe architecture overview/i);
-    const flow = flowCaption.closest('figure');
-    expect(flow).not.toBeNull();
+    const flow = screen.getByRole('figure', { name: /Safe architecture overview/i });
     expect(within(flow).getAllByRole('listitem')).toHaveLength(6);
     expect(within(flow).getByText(/Validated structured output/i)).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /View Pulse on GitHub/i })).toHaveAttribute(
       'href',
       'https://github.com/TheLoop705/pulse-observability',
+    );
+  });
+
+  test('features the public investment research system with live and source links', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: /Working systems, with the seams visible/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Investment Research Agent/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Open live system/i })).toHaveAttribute(
+      'href',
+      'https://theloop705.github.io/investment-research-agent/',
+    );
+    expect(screen.getByRole('link', { name: /Inspect source/i })).toHaveAttribute(
+      'href',
+      'https://github.com/TheLoop705/investment-research-agent',
+    );
+    expect(screen.getByRole('link', { name: /This site is open source/i })).toHaveAttribute(
+      'href',
+      'https://github.com/TheLoop705/personal-portfolio',
     );
   });
 

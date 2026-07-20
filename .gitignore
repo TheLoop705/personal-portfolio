@@ -11,6 +11,12 @@
 # production
 /build
 
+# local environment and Cloudflare state
+.env
+.env.*
+!.env.example
+/.wrangler/
+
 # misc
 .DS_Store
 .env.local

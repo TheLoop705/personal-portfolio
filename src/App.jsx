@@ -4,7 +4,10 @@ import './App.css';
 const LINKS = {
   email: 'contact@sultandayani.com',
   github: 'https://github.com/TheLoop705',
+  investmentLive: 'https://theloop705.github.io/investment-research-agent/',
+  investmentSource: 'https://github.com/TheLoop705/investment-research-agent',
   linkedin: 'https://www.linkedin.com/in/sultan-dayani-3419a01b1',
+  portfolioSource: 'https://github.com/TheLoop705/personal-portfolio',
   pulse: 'https://github.com/TheLoop705/pulse-observability',
 };
 
@@ -78,6 +81,7 @@ function Navigation() {
         <div className="nav-links" data-open={isOpen} id="primary-menu">
           <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#work" onClick={closeMenu}>Case studies</a>
+          <a href="#open-source" onClick={closeMenu}>Open source</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
           <a className="nav-links__external" href={LINKS.linkedin} target="_blank" rel="noreferrer">
             LinkedIn <ArrowUpRight size={14} />
@@ -291,7 +295,7 @@ function LlmCaseStudy() {
         <Fact label="Output">Validated JSON · Review highlights</Fact>
       </CaseFacts>
 
-      <figure className="architecture">
+      <figure aria-label="Safe architecture overview" className="architecture">
         <figcaption>
           <span>System flow</span>
           Safe architecture overview
@@ -395,6 +399,91 @@ function Work() {
   );
 }
 
+const researchLoop = [
+  { stage: 'Collect', detail: 'Market and news inputs' },
+  { stage: 'Analyze', detail: 'Repeatable research passes' },
+  { stage: 'Structure', detail: 'Digest-ready output' },
+  { stage: 'Publish', detail: 'Static public dashboard' },
+];
+
+function OpenSourceLab() {
+  return (
+    <section className="open-source-lab shell" id="open-source">
+      <SectionHeading
+        label="Open-source lab"
+        title="Working systems, with the seams visible"
+        intro="Public projects where the implementation, operating model and output can be inspected—not just described."
+      />
+
+      <article className="lab-project">
+        <div className="lab-project__bar">
+          <span>Featured build / 01</span>
+          <span className="lab-project__status"><i aria-hidden="true" /> Public system</span>
+        </div>
+
+        <div className="lab-project__grid">
+          <div className="lab-project__copy">
+            <p className="record-label"><span>AI automation</span> Local-first research</p>
+            <h3>Investment Research Agent</h3>
+            <p className="lab-project__lede">
+              A research pipeline that collects market signals, turns them into structured digests, and publishes a static dashboard for inspection.
+            </p>
+
+            <dl className="lab-project__facts">
+              <div>
+                <dt>Mode</dt>
+                <dd>Local-first agent</dd>
+              </div>
+              <div>
+                <dt>Delivery</dt>
+                <dd>Scheduled refresh · Static publish</dd>
+              </div>
+              <div>
+                <dt>Interface</dt>
+                <dd>Web dashboard</dd>
+              </div>
+            </dl>
+
+            <div className="lab-project__actions">
+              <a className="lab-action lab-action--primary" href={LINKS.investmentLive} target="_blank" rel="noreferrer">
+                Open live system <ArrowUpRight />
+              </a>
+              <a className="lab-action" href={LINKS.investmentSource} target="_blank" rel="noreferrer">
+                Inspect source <ArrowUpRight />
+              </a>
+            </div>
+          </div>
+
+          <figure className="research-loop">
+            <figcaption>
+              <span>Operating loop</span>
+              <span>Scheduled publication</span>
+            </figcaption>
+            <ol>
+              {researchLoop.map((item, index) => (
+                <li key={item.stage}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <strong>{item.stage}</strong>
+                    <small>{item.detail}</small>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </figure>
+        </div>
+
+        <div className="lab-project__footnote">
+          <span>Python · FastAPI · GitHub Actions · Static publishing</span>
+          <a href={LINKS.portfolioSource} target="_blank" rel="noreferrer">
+            This site is open source <ArrowUpRight size={13} />
+          </a>
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section className="contact shell" id="contact">
@@ -428,6 +517,7 @@ function Footer() {
           <a href="#top">Top</a>
           <a href="#experience">Experience</a>
           <a href="#work">Case studies</a>
+          <a href="#open-source">Open source</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -450,6 +540,7 @@ export default function App() {
         <Hero />
         <Leadership />
         <Work />
+        <OpenSourceLab />
         <Contact />
       </main>
       <Footer />

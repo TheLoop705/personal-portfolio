@@ -20,10 +20,22 @@ npm run build
 
 ## Deployment
 
-The project is configured for `https://sultandayani.com` and can be published to GitHub Pages with:
+Production is hosted by the existing Cloudflare Pages Direct Upload project
+`personal-portfolio`. A push to `main` runs the deployment workflow, which:
 
-```bash
-npm run deploy
-```
+1. installs the locked dependencies;
+2. runs the test suite;
+3. creates the production build;
+4. stores the build as a short-lived GitHub artifact; and
+5. deploys `build/` to Cloudflare Pages with Wrangler.
+
+The repository requires these GitHub Actions secrets:
+
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_API_TOKEN` — a dedicated token limited to **Account → Cloudflare Pages → Edit**
+
+The workflow can also be started manually from GitHub Actions. Cloudflare retains
+previous Pages deployments for rollback, and GitHub retains each workflow's build
+artifact for 14 days.
 
 The resume action currently opens an email request because no current resume PDF is stored in the repository. Add the approved file under `public/` and update the resume links in `src/App.jsx` before changing that action to a download.
