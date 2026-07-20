@@ -1,745 +1,455 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
+import './App.css';
 
-/* ─────────────────────────────────────────────
-   PALETTE & TOKENS
-   Warm ivory / charcoal editorial palette
-   with a single copper-rust accent
-   ───────────────────────────────────────────── */
-const T = {
-  bg:        '#F5F0EB',
-  bgAlt:     '#EDE7E0',
-  surface:   '#FDFBF9',
-  ink:       '#1A1714',
-  inkSoft:   '#5C564E',
-  inkMuted:  '#9B9489',
-  accent:    '#C4572A',
-  accentSoft:'#E8764A',
-  rule:      '#D6CFC6',
-  serif:     '"Instrument Serif", Georgia, serif',
-  sans:      '"DM Sans", system-ui, sans-serif',
-  mono:      '"JetBrains Mono", monospace',
+const LINKS = {
+  email: 'contact@sultandayani.com',
+  github: 'https://github.com/TheLoop705',
+  linkedin: 'https://www.linkedin.com/in/sultan-dayani-3419a01b1',
+  pulse: 'https://github.com/TheLoop705/pulse-observability',
 };
 
-/* ─────────────────────────────────────────────
-   INTERSECTION-OBSERVER HOOK
-   ───────────────────────────────────────────── */
-function useReveal(threshold = 0.15) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setVisible(true); io.unobserve(el); } },
-      { threshold }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [threshold]);
-  return [ref, visible];
+function ArrowUpRight({ size = 16 }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className="icon"
+      fill="none"
+      height={size}
+      viewBox="0 0 16 16"
+      width={size}
+    >
+      <path d="M3 13 13 3M6 3h7v7" />
+    </svg>
+  );
 }
 
-/* ─────────────────────────────────────────────
-   ANIMATED WRAPPER
-   ───────────────────────────────────────────── */
-function Reveal({ children, delay = 0, direction = 'up', style = {}, ...rest }) {
-  const [ref, visible] = useReveal(0.1);
-  const translate = {
-    up: 'translateY(48px)',
-    down: 'translateY(-48px)',
-    left: 'translateX(48px)',
-    right: 'translateX(-48px)',
-    none: 'none',
-  };
+function ArrowRight({ size = 18 }) {
   return (
-    <div
-      ref={ref}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'none' : translate[direction],
-        transition: `opacity 0.8s cubic-bezier(.16,1,.3,1) ${delay}s, transform 0.8s cubic-bezier(.16,1,.3,1) ${delay}s`,
-        ...style,
-      }}
-      {...rest}
+    <svg
+      aria-hidden="true"
+      className="icon"
+      fill="none"
+      height={size}
+      viewBox="0 0 18 18"
+      width={size}
     >
-      {children}
+      <path d="M2 9h13M10.5 4.5 15 9l-4.5 4.5" />
+    </svg>
+  );
+}
+
+function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, []);
+
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <header className="site-header">
+      <nav aria-label="Primary navigation" className="nav shell">
+        <a aria-label="Sultan Dayani, back to top" className="brand" href="#top" onClick={closeMenu}>
+          <span className="brand__mark" aria-hidden="true">SD</span>
+          <span className="brand__copy">
+            <strong>Sultan Dayani</strong>
+            <small>Technical Lead</small>
+          </span>
+        </a>
+
+        <button
+          aria-controls="primary-menu"
+          aria-expanded={isOpen}
+          aria-label={isOpen ? 'Close navigation' : 'Open navigation'}
+          className="nav-toggle"
+          onClick={() => setIsOpen((open) => !open)}
+          type="button"
+        >
+          <span />
+          <span />
+        </button>
+
+        <div className="nav-links" data-open={isOpen} id="primary-menu">
+          <a href="#experience" onClick={closeMenu}>Experience</a>
+          <a href="#work" onClick={closeMenu}>Case studies</a>
+          <a href="#contact" onClick={closeMenu}>Contact</a>
+          <a className="nav-links__external" href={LINKS.linkedin} target="_blank" rel="noreferrer">
+            LinkedIn <ArrowUpRight size={14} />
+          </a>
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+function CapabilityMap() {
+  const routes = [
+    { code: 'AI', title: 'Production capability', detail: 'Useful, governed and measurable' },
+    { code: 'DX', title: 'Developer experience', detail: 'Patterns teams can adopt' },
+    { code: 'CLD', title: 'Cloud platforms', detail: 'Reliable paths to production' },
+  ];
+
+  return (
+    <aside aria-label="How Sultan creates engineering leverage" className="capability-map hero-enter hero-enter--four">
+      <div className="capability-map__header">
+        <span>Operating model</span>
+        <span className="status"><i /> Production-minded</span>
+      </div>
+
+      <div className="system-map">
+        <div className="system-node system-node--origin">
+          <span>Input</span>
+          <strong>Complex product need</strong>
+        </div>
+
+        <div className="system-routes">
+          {routes.map((route) => (
+            <div className="route" key={route.code}>
+              <span className="route__code">{route.code}</span>
+              <strong>{route.title}</strong>
+              <small>{route.detail}</small>
+            </div>
+          ))}
+        </div>
+
+        <div className="system-node system-node--outcome">
+          <span>Outcome</span>
+          <strong>Change the team can own</strong>
+        </div>
+      </div>
+
+      <div className="capability-map__footer" aria-label="Working sequence">
+        <span>Design</span>
+        <ArrowRight size={15} />
+        <span>Align</span>
+        <ArrowRight size={15} />
+        <span>Enable</span>
+        <ArrowRight size={15} />
+        <span>Operate</span>
+      </div>
+    </aside>
+  );
+}
+
+function Hero() {
+  return (
+    <section className="hero shell" id="top">
+      <div className="hero__copy">
+        <p className="eyebrow hero-enter hero-enter--one">Technical Lead &amp; Software Engineer</p>
+        <h1 className="hero-enter hero-enter--two">Sultan Dayani<span>.</span></h1>
+        <p className="hero__disciplines hero-enter hero-enter--two">
+          <span>AI Enablement</span><i aria-hidden="true" />
+          <span>Developer Experience</span><i aria-hidden="true" />
+          <span>Cloud Platforms</span>
+        </p>
+        <p className="hero__summary hero-enter hero-enter--three">
+          I design production AI capabilities, modernize engineering platforms, and help development teams adopt new tools and practices effectively.
+        </p>
+
+        <div className="hero__actions hero-enter hero-enter--three">
+          <a className="button button--primary" href="#experience">
+            View experience <ArrowRight />
+          </a>
+          <a className="button button--secondary" href="#work">View projects</a>
+        </div>
+
+        <div className="hero__utility hero-enter hero-enter--four" aria-label="Professional links">
+          <a href={`mailto:${LINKS.email}?subject=Resume%20request`}>Request resume</a>
+          <a href={LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={13} /></a>
+          <a href={LINKS.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={13} /></a>
+        </div>
+      </div>
+
+      <CapabilityMap />
+
+      <div className="hero__footnote hero-enter hero-enter--four">
+        <span>Based in Frankfurt, Germany</span>
+        <a href="#work">Explore selected work <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+  );
+}
+
+function SectionHeading({ label, title, intro, light = false }) {
+  return (
+    <div className={`section-heading${light ? ' section-heading--light' : ''}`}>
+      <p className="eyebrow">{label}</p>
+      <div className="section-heading__row">
+        <h2>{title}</h2>
+        {intro && <p>{intro}</p>}
+      </div>
     </div>
   );
 }
 
-/* ─────────────────────────────────────────────
-   GRAIN OVERLAY (SVG noise texture)
-   ───────────────────────────────────────────── */
-function GrainOverlay() {
+const leadershipAreas = [
+  {
+    label: 'Product direction',
+    items: [
+      'Technical Lead responsibility for a new product',
+      'Roadmap and backlog ownership',
+    ],
+  },
+  {
+    label: 'Architecture practice',
+    items: [
+      'Architecture decisions and ADRs',
+      'Engineering guidelines that make decisions reusable',
+    ],
+  },
+  {
+    label: 'Team enablement',
+    items: [
+      'Onboarding and continuous mentoring of three engineers',
+      'Turning new tools into practices teams can sustain',
+    ],
+  },
+  {
+    label: 'Responsible AI',
+    items: [
+      'Selected member of a company-wide AI pilot team',
+      'Tool evaluation, governance requirements and responsible adoption',
+    ],
+  },
+];
+
+function Leadership() {
   return (
-    <div style={{
-      position: 'fixed', inset: 0, zIndex: 9999, pointerEvents: 'none',
-      opacity: 0.035,
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-      backgroundRepeat: 'repeat',
-      backgroundSize: '128px 128px',
-    }} />
-  );
-}
+    <section className="leadership" id="experience">
+      <div className="shell">
+        <SectionHeading
+          label="Experience / scope"
+          light
+          title="Technical leadership & enablement"
+          intro="Moving a capability into production takes more than implementation. I connect product direction, architecture, team development and responsible adoption."
+        />
 
-/* ─────────────────────────────────────────────
-   NAV
-   ───────────────────────────────────────────── */
-function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
-  }, []);
-
-  const links = ['About', 'Tech Stack', 'Projects', 'Contact'];
-
-  const scrollTo = useCallback((id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-    setMobileOpen(false);
-  }, []);
-
-  return (
-    <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: scrolled ? 'rgba(245,240,235,0.92)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
-      borderBottom: scrolled ? `1px solid ${T.rule}` : '1px solid transparent',
-      transition: 'all 0.4s ease',
-      padding: '0 clamp(24px, 5vw, 80px)',
-    }}>
-      <div style={{
-        maxWidth: 1200, margin: '0 auto',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        height: scrolled ? 60 : 72, transition: 'height 0.4s ease',
-      }}>
-        <button onClick={() => scrollTo('hero')} style={{
-          background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-          fontFamily: T.serif, fontSize: 22, color: T.ink, letterSpacing: '-0.02em',
-        }}>SD.</button>
-
-        {/* Desktop links */}
-        <div style={{
-          display: 'flex', gap: 32, alignItems: 'center',
-        }} className="nav-desktop">
-          {links.map(l => (
-            <button key={l} onClick={() => scrollTo(l.toLowerCase())} style={{
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontFamily: T.sans, fontSize: 13, fontWeight: 500,
-              color: T.inkSoft, letterSpacing: '0.04em', textTransform: 'uppercase',
-              padding: '4px 0', position: 'relative',
-              transition: 'color 0.3s',
-            }}
-            onMouseEnter={e => e.target.style.color = T.accent}
-            onMouseLeave={e => e.target.style.color = T.inkSoft}
-            >{l}</button>
+        <div className="leadership-grid">
+          {leadershipAreas.map((area) => (
+            <article className="leadership-card" key={area.label}>
+              <h3>{area.label}</h3>
+              <ul>
+                {area.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </article>
           ))}
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="nav-mobile-toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          style={{
-            display: 'none', background: 'none', border: 'none', cursor: 'pointer',
-            padding: 8, color: T.ink,
-          }}
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            {mobileOpen
-              ? <path d="M6 6l12 12M6 18L18 6" />
-              : <><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></>
-            }
-          </svg>
-        </button>
-      </div>
-
-      {/* Mobile dropdown */}
-      {mobileOpen && (
-        <div className="nav-mobile-menu" style={{
-          background: 'rgba(245,240,235,0.98)', backdropFilter: 'blur(16px)',
-          padding: '16px 0 24px', borderBottom: `1px solid ${T.rule}`,
-        }}>
-          {links.map(l => (
-            <button key={l} onClick={() => scrollTo(l.toLowerCase())} style={{
-              display: 'block', width: '100%', textAlign: 'left',
-              background: 'none', border: 'none', cursor: 'pointer',
-              fontFamily: T.sans, fontSize: 15, fontWeight: 400,
-              color: T.inkSoft, padding: '10px 0',
-            }}>{l}</button>
-          ))}
+        <div className="leadership-band" aria-label="Leadership scope">
+          <span>Product</span><i />
+          <span>Architecture</span><i />
+          <span>People</span><i />
+          <span>Governance</span>
         </div>
-      )}
-    </nav>
+      </div>
+    </section>
   );
 }
 
-/* ─────────────────────────────────────────────
-   HERO
-   ───────────────────────────────────────────── */
-function Hero() {
-  const [loaded, setLoaded] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setLoaded(true), 100); return () => clearTimeout(t); }, []);
+function CaseFacts({ children }) {
+  return <dl className="case-facts">{children}</dl>;
+}
 
-  const anim = (delay) => ({
-    opacity: loaded ? 1 : 0,
-    transform: loaded ? 'none' : 'translateY(40px)',
-    transition: `opacity 1s cubic-bezier(.16,1,.3,1) ${delay}s, transform 1s cubic-bezier(.16,1,.3,1) ${delay}s`,
-  });
-
+function Fact({ label, children }) {
   return (
-    <section id="hero" style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      justifyContent: 'center', padding: 'clamp(100px, 15vh, 180px) clamp(24px, 5vw, 80px) clamp(60px, 10vh, 120px)',
-      maxWidth: 1200, margin: '0 auto', position: 'relative',
-    }}>
-      <div style={anim(0.1)}>
-        <span style={{
-          fontFamily: T.mono, fontSize: 13, color: T.accent,
-          letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 500,
-        }}>Software Engineer</span>
-      </div>
+    <div>
+      <dt>{label}</dt>
+      <dd>{children}</dd>
+    </div>
+  );
+}
 
-      <h1 style={{
-        fontFamily: T.serif, fontWeight: 400, color: T.ink,
-        fontSize: 'clamp(56px, 10vw, 130px)', lineHeight: 0.95,
-        letterSpacing: '-0.03em', margin: '24px 0 0',
-        ...anim(0.25),
-      }}>
-        Sultan Dayani
-      </h1>
+const llmFlow = [
+  'Transcription platform',
+  'Structured speaker segments',
+  'Python AI service',
+  'Managed prompt and LLM',
+  'Validated structured output',
+  'Summary and review highlights',
+];
 
-      <div style={{
-        width: 80, height: 2, background: T.accent,
-        margin: '40px 0', ...anim(0.4),
-      }} />
+function LlmCaseStudy() {
+  return (
+    <article className="case-study case-study--featured">
+      <header className="case-study__header">
+        <p className="record-label"><span>AI systems</span> Private production work</p>
+        <h3>Production LLM capability for an aviation transcription product</h3>
+        <p className="case-study__lede">
+          Designed and technically led an LLM-powered workflow that turns large transcript volumes into useful summaries and focused human-review signals.
+        </p>
+      </header>
 
-      <p style={{
-        fontFamily: T.sans, fontSize: 'clamp(17px, 2vw, 21px)', lineHeight: 1.6,
-        color: T.inkSoft, maxWidth: 540, fontWeight: 300,
-        ...anim(0.5),
-      }}>
-        Building full-stack applications and data pipelines — from Spring Boot
-        microservices to AI-powered automation tools.
+      <CaseFacts>
+        <Fact label="Role">Technical design &amp; leadership</Fact>
+        <Fact label="Integration">Python service · OpenAI API</Fact>
+        <Fact label="Output">Validated JSON · Review highlights</Fact>
+      </CaseFacts>
+
+      <figure className="architecture">
+        <figcaption>
+          <span>System flow</span>
+          Safe architecture overview
+        </figcaption>
+        <ol>
+          {llmFlow.map((step, index) => (
+            <li key={step}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{step}</strong>
+            </li>
+          ))}
+        </ol>
+      </figure>
+
+      <p className="confidentiality-note">
+        <span aria-hidden="true">◈</span>
+        Shown intentionally at system level. Customer details, prompts, domain rules, schemas, screenshots and source code remain confidential.
       </p>
-
-      <div style={{ marginTop: 48, display: 'flex', gap: 16, flexWrap: 'wrap', ...anim(0.65) }}>
-        <button
-          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          style={{
-            fontFamily: T.sans, fontSize: 14, fontWeight: 500,
-            background: T.ink, color: T.bg, border: 'none',
-            padding: '14px 36px', cursor: 'pointer',
-            letterSpacing: '0.03em',
-            transition: 'background 0.3s',
-          }}
-          onMouseEnter={e => e.target.style.background = T.accent}
-          onMouseLeave={e => e.target.style.background = T.ink}
-        >View Work</button>
-        <button
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          style={{
-            fontFamily: T.sans, fontSize: 14, fontWeight: 500,
-            background: 'transparent', color: T.ink,
-            border: `1px solid ${T.rule}`, padding: '14px 36px',
-            cursor: 'pointer', letterSpacing: '0.03em',
-            transition: 'border-color 0.3s',
-          }}
-          onMouseEnter={e => e.target.style.borderColor = T.accent}
-          onMouseLeave={e => e.target.style.borderColor = T.rule}
-        >Get in Touch</button>
-      </div>
-
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: 40, left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        ...anim(1.0),
-      }}>
-        <span style={{ fontFamily: T.mono, fontSize: 10, color: T.inkMuted, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Scroll</span>
-        <div style={{
-          width: 1, height: 40, background: `linear-gradient(to bottom, ${T.inkMuted}, transparent)`,
-          animation: 'scrollPulse 2s ease-in-out infinite',
-        }} />
-      </div>
-    </section>
+    </article>
   );
 }
 
-/* ─────────────────────────────────────────────
-   SECTION HEADER
-   ───────────────────────────────────────────── */
-function SectionHeader({ number, title, align = 'left' }) {
+function PlatformCaseStudy() {
   return (
-    <Reveal style={{ marginBottom: 32, textAlign: align }}>
-      <span style={{
-        fontFamily: T.mono, fontSize: 12, color: T.accent,
-        letterSpacing: '0.1em', textTransform: 'uppercase',
-      }}>{number}</span>
-      <h2 style={{
-        fontFamily: T.serif, fontWeight: 400, fontSize: 'clamp(36px, 5vw, 56px)',
-        color: T.ink, letterSpacing: '-0.02em', margin: '8px 0 0', lineHeight: 1.1,
-      }}>{title}</h2>
-      <div style={{
-        width: 48, height: 2, background: T.accent,
-        margin: align === 'center' ? '20px auto 0' : '20px 0 0',
-      }} />
-    </Reveal>
-  );
-}
+    <article className="case-study case-study--compact">
+      <header className="case-study__header">
+        <p className="record-label"><span>Cloud platform</span> Team modernization</p>
+        <h3>Cloud deployment toolchain modernization</h3>
+        <p className="case-study__lede">
+          Led the transition from shell-driven CloudFormation deployments to reusable AWS CDK components integrating EKS, Helm and Kubernetes operations.
+        </p>
+      </header>
 
-/* ─────────────────────────────────────────────
-   ABOUT
-   ───────────────────────────────────────────── */
-function About() {
-  return (
-    <section id="about" style={{
-      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
-      maxWidth: 1200, margin: '0 auto',
-    }}>
-      <SectionHeader number="01" title="About" />
-      <div style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 400px), 1fr))',
-        gap: 'clamp(24px, 4vw, 48px)', alignItems: 'start',
-      }}>
-        <Reveal delay={0.1}>
-          <p style={{
-            fontFamily: T.serif, fontStyle: 'italic', fontSize: 'clamp(22px, 3vw, 30px)',
-            color: T.ink, lineHeight: 1.45, letterSpacing: '-0.01em',
-          }}>
-            I build software that solves real problems — from idea to production.
-          </p>
-        </Reveal>
+      <div className="transition-map" aria-label="Deployment approach transition">
         <div>
-          <Reveal delay={0.2}>
-            <p style={{
-              fontFamily: T.sans, fontSize: 16, lineHeight: 1.75, color: T.inkSoft, fontWeight: 300,
-            }}>
-              Full-stack engineer who enjoys working across the entire stack — backends,
-              frontends, data pipelines, and infrastructure. I care about writing clean,
-              maintainable code and shipping things that people actually use.
-            </p>
-          </Reveal>
+          <span>From</span>
+          <strong>Shell-driven deployments</strong>
+        </div>
+        <ArrowRight size={22} />
+        <div>
+          <span>To</span>
+          <strong>Reusable infrastructure patterns</strong>
+        </div>
+      </div>
+
+      <CaseFacts>
+        <Fact label="Leadership">Target approach &amp; team coordination</Fact>
+        <Fact label="Platform">AWS CDK · EKS · Helm · Kubernetes</Fact>
+      </CaseFacts>
+    </article>
+  );
+}
+
+function ObservabilityCaseStudy() {
+  return (
+    <article className="case-study case-study--compact case-study--pulse">
+      <header className="case-study__header">
+        <p className="record-label"><span>Open source</span> Reference platform</p>
+        <h3>OpenTelemetry observability reference platform</h3>
+        <p className="case-study__lede">
+          Pulse is a containerized reference stack for exploring metrics, traces and logs through one coherent observability path.
+        </p>
+      </header>
+
+      <div className="signal-map" aria-label="Pulse signal types">
+        <div><i className="signal-map__metric" /> Metrics</div>
+        <div><i className="signal-map__trace" /> Traces</div>
+        <div><i className="signal-map__log" /> Logs</div>
+        <span>OpenTelemetry → backends → Grafana</span>
+      </div>
+
+      <CaseFacts>
+        <Fact label="Stack">Prometheus · Jaeger · OpenSearch · Grafana</Fact>
+        <Fact label="Delivery">Containerized, local-first reference environment</Fact>
+      </CaseFacts>
+
+      <a className="case-link" href={LINKS.pulse} target="_blank" rel="noreferrer">
+        View Pulse on GitHub <ArrowUpRight />
+      </a>
+    </article>
+  );
+}
+
+function Work() {
+  return (
+    <section className="work shell" id="work">
+      <SectionHeading
+        label="Selected work"
+        title="Evidence, not a technology inventory"
+        intro="Three examples of how I frame a problem, shape the technical path and leave behind a capability others can operate."
+      />
+
+      <div className="case-list">
+        <LlmCaseStudy />
+        <div className="case-list__secondary">
+          <PlatformCaseStudy />
+          <ObservabilityCaseStudy />
         </div>
       </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────────
-   SKILLS
-   ───────────────────────────────────────────── */
-const skillsData = [
-  {
-    category: 'Backend',
-    icon: '{}',
-    items: ['Java', 'Spring Boot', 'Python', 'FastAPI', 'Node.js', 'REST APIs'],
-  },
-  {
-    category: 'Frontend',
-    icon: '</>',
-    items: ['Angular', 'TypeScript', 'React', 'Next.js', 'HTMX', 'HTML/CSS'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    icon: '>>',
-    items: ['Docker', 'Kubernetes', 'Podman', 'CI/CD', 'GitHub Actions', 'Linux'],
-  },
-  {
-    category: 'Data & AI',
-    icon: '[]',
-    items: ['PostgreSQL', 'MongoDB', 'OpenAI/Whisper', 'ML Pipelines', 'Async Python'],
-  },
-];
-
-function Skills() {
-  return (
-    <section id="tech stack" style={{
-      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
-      background: T.bgAlt, position: 'relative',
-    }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <SectionHeader number="02" title="Tech Stack" />
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))',
-          gap: 24,
-        }}>
-          {skillsData.map((group, gi) => (
-            <Reveal key={group.category} delay={gi * 0.12} style={{ height: '100%' }}>
-              <div style={{
-                background: T.surface, padding: 'clamp(20px, 2.5vw, 28px)',
-                border: `1px solid ${T.rule}`,
-                position: 'relative', overflow: 'hidden', height: '100%',
-                display: 'flex', flexDirection: 'column',
-                transition: 'border-color 0.3s, box-shadow 0.3s',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = T.accent;
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(196,87,42,0.08)';
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = T.rule;
-                e.currentTarget.style.boxShadow = 'none';
-              }}
-              >
-                {/* Big decorative character */}
-                <span style={{
-                  position: 'absolute', top: -8, right: 12,
-                  fontFamily: T.mono, fontSize: 80, color: T.rule,
-                  opacity: 0.4, fontWeight: 400, lineHeight: 1, userSelect: 'none',
-                }}>{group.icon}</span>
-
-                <span style={{
-                  fontFamily: T.mono, fontSize: 11, color: T.accent,
-                  letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8,
-                }}>0{gi + 1}</span>
-                <h3 style={{
-                  fontFamily: T.serif, fontSize: 24, color: T.ink,
-                  fontWeight: 400, margin: '0 0 24px', letterSpacing: '-0.01em',
-                }}>{group.category}</h3>
-
-                <div style={{
-                  display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 'auto',
-                }}>
-                  {group.items.map(item => (
-                    <span key={item} style={{
-                      fontFamily: T.sans, fontSize: 13, fontWeight: 400,
-                      color: T.inkSoft, padding: '6px 14px',
-                      border: `1px solid ${T.rule}`, background: T.bg,
-                      transition: 'all 0.25s',
-                      cursor: 'default',
-                    }}
-                    onMouseEnter={e => {
-                      e.target.style.background = T.accent;
-                      e.target.style.color = '#fff';
-                      e.target.style.borderColor = T.accent;
-                    }}
-                    onMouseLeave={e => {
-                      e.target.style.background = T.bg;
-                      e.target.style.color = T.inkSoft;
-                      e.target.style.borderColor = T.rule;
-                    }}
-                    >{item}</span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   PROJECTS
-   ───────────────────────────────────────────── */
-const projectsData = [
-  {
-    title: 'Options Flow Tracker',
-    desc: 'Full-stack options flow analysis platform. Async Python collectors pulling from Unusual Whales API, React dashboard with anomaly detection, FastAPI backend. 16+ data collectors running 24/7.',
-    tags: ['Python', 'FastAPI', 'React', 'Unusual Whales API', 'ML'],
-    color: '#4A3B6B',
-    link: null,
-  },
-  {
-    title: 'Grano Bar',
-    desc: 'Restaurant website for a local Frankfurt bar. Clean, modern design with HTMX for smooth interactivity. Lightweight and fast.',
-    tags: ['HTMX', 'Python', 'HTML/CSS', 'Web Design'],
-    color: '#6B3B3B',
-    link: null,
-  },
-  {
-    title: 'Spotify Insights',
-    desc: 'Next.js dashboard that analyzes your Spotify listening data. PostgreSQL backend with rich data visualizations and listening history.',
-    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Spotify API'],
-    color: '#1DB954',
-    link: null,
-  },
-  {
-    title: 'COVID QR Registration',
-    desc: 'Flutter mobile apps for QR-code based COVID contact tracing. Owner app generates scannable codes, customer app registers visits. Built during the pandemic.',
-    tags: ['Flutter', 'Dart', 'Firebase', 'Mobile'],
-    color: '#3B5A6B',
-    link: 'https://github.com/TheLoop705/covid-owner-app',
-  },
-  {
-    title: 'OpenClaw Skills',
-    desc: 'Collection of AI agent skills for the OpenClaw platform: options flow intelligence, newsletter automation, Home Assistant control, and LLM memory management.',
-    tags: ['Python', 'OpenClaw', 'AI Agents', 'Automation'],
-    color: '#C4572A',
-    link: 'https://github.com/TheLoop705/openclaw-skills',
-  },
-];
-
-function Projects() {
-  return (
-    <section id="projects" style={{
-      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
-      maxWidth: 1200, margin: '0 auto',
-    }}>
-      <SectionHeader number="03" title="Projects" />
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
-        gap: 24,
-      }}>
-        {projectsData.map((p, i) => (
-          <Reveal key={p.title} delay={i * 0.1} style={{ height: '100%' }}>
-            <a href={p.link || '#!'} target={p.link ? '_blank' : undefined} rel={p.link ? 'noopener noreferrer' : undefined} style={{
-              display: 'flex', flexDirection: 'column',
-              border: `1px solid ${T.rule}`, overflow: 'hidden',
-              textDecoration: 'none', color: 'inherit', height: '100%',
-              transition: 'border-color 0.3s, transform 0.3s, box-shadow 0.3s',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = T.accent;
-              e.currentTarget.style.transform = 'translateY(-4px)';
-              e.currentTarget.style.boxShadow = '0 12px 40px rgba(0,0,0,0.06)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = T.rule;
-              e.currentTarget.style.transform = 'none';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-            >
-              {/* Color band header */}
-              <div style={{
-                background: p.color, padding: '28px 28px 24px',
-                position: 'relative', overflow: 'hidden',
-              }}>
-                <span style={{
-                  position: 'absolute', top: -10, right: -10,
-                  fontFamily: T.serif, fontSize: 120, color: 'rgba(255,255,255,0.07)',
-                  lineHeight: 1, fontStyle: 'italic', userSelect: 'none',
-                }}>{p.title.charAt(0)}</span>
-                <span style={{
-                  fontFamily: T.mono, fontSize: 11, color: 'rgba(255,255,255,0.5)',
-                  letterSpacing: '0.08em', textTransform: 'uppercase',
-                }}>Project 0{i + 1}</span>
-                <h3 style={{
-                  fontFamily: T.serif, fontSize: 28, color: '#fff',
-                  fontWeight: 400, margin: '8px 0 0', letterSpacing: '-0.01em',
-                }}>{p.title}</h3>
-              </div>
-
-              {/* Body */}
-              <div style={{
-                padding: '20px 28px 24px', background: T.surface,
-                flex: 1, display: 'flex', flexDirection: 'column',
-              }}>
-                <p style={{
-                  fontFamily: T.sans, fontSize: 15, lineHeight: 1.7,
-                  color: T.inkSoft, fontWeight: 300, flex: 1,
-                }}>{p.desc}</p>
-
-                <div style={{
-                  display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 20,
-                  paddingTop: 16, borderTop: `1px solid ${T.rule}`,
-                }}>
-                  {p.tags.map(tag => (
-                    <span key={tag} style={{
-                      fontFamily: T.mono, fontSize: 11, color: T.inkMuted,
-                      padding: '4px 10px', background: T.bg,
-                      letterSpacing: '0.02em',
-                    }}>{tag}</span>
-                  ))}
-                </div>
-
-                <div style={{
-                  display: 'flex', alignItems: 'center', gap: 6,
-                  marginTop: 16, fontFamily: T.sans, fontSize: 13,
-                  fontWeight: 500, color: T.accent,
-                }}>
-                  {p.link ? 'View on GitHub' : 'Private Project'}
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M1 7h12M8 2l5 5-5 5" />
-                  </svg>
-                </div>
-              </div>
-            </a>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-
-
-/* ─────────────────────────────────────────────
-   CONTACT
-   ───────────────────────────────────────────── */
 function Contact() {
   return (
-    <section id="contact" style={{
-      padding: 'clamp(48px, 8vh, 80px) clamp(24px, 5vw, 80px)',
-      maxWidth: 1200, margin: '0 auto', textAlign: 'center',
-    }}>
-      <SectionHeader number="04" title="Get in Touch" align="center" />
-
-      <Reveal delay={0.1}>
-        <p style={{
-          fontFamily: T.serif, fontStyle: 'italic', fontSize: 'clamp(20px, 3vw, 28px)',
-          color: T.ink, lineHeight: 1.5, maxWidth: 560, margin: '0 auto 28px',
-          letterSpacing: '-0.01em',
-        }}>
-          Always open to interesting conversations, collaborations, or just a good tech debate.
-        </p>
-      </Reveal>
-
-      <Reveal delay={0.2}>
-        <a href="mailto:contact@sultandayani.com" style={{
-          fontFamily: T.sans, fontSize: 'clamp(16px, 2vw, 20px)',
-          color: T.accent, textDecoration: 'none', fontWeight: 500,
-          borderBottom: `1px solid transparent`,
-          transition: 'border-color 0.3s',
-          paddingBottom: 2,
-        }}
-        onMouseEnter={e => e.target.style.borderColor = T.accent}
-        onMouseLeave={e => e.target.style.borderColor = 'transparent'}
-        >contact@sultandayani.com</a>
-      </Reveal>
-
-      <Reveal delay={0.3}>
-        <div style={{
-          display: 'flex', justifyContent: 'center', gap: 32, marginTop: 28,
-        }}>
-          {[
-            { label: 'GitHub', href: 'https://github.com/TheLoop705' },
-            { label: 'LinkedIn', href: '#' },
-          ].map(link => (
-            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" style={{
-              fontFamily: T.mono, fontSize: 13, color: T.inkSoft,
-              textDecoration: 'none', letterSpacing: '0.04em',
-              padding: '10px 24px', border: `1px solid ${T.rule}`,
-              transition: 'all 0.3s',
-            }}
-            onMouseEnter={e => {
-              e.target.style.borderColor = T.accent;
-              e.target.style.color = T.accent;
-            }}
-            onMouseLeave={e => {
-              e.target.style.borderColor = T.rule;
-              e.target.style.color = T.inkSoft;
-            }}
-            >{link.label}</a>
-          ))}
+    <section className="contact shell" id="contact">
+      <p className="eyebrow">Start a conversation</p>
+      <div className="contact__grid">
+        <h2>Looking for technical leadership that connects architecture with adoption?</h2>
+        <div className="contact__details">
+          <p>
+            I’m interested in conversations around AI enablement, developer experience, cloud platforms and production engineering.
+          </p>
+          <a className="contact__email" href={`mailto:${LINKS.email}`}>
+            {LINKS.email} <ArrowUpRight size={20} />
+          </a>
+          <div className="contact__links">
+            <a href={LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={13} /></a>
+            <a href={LINKS.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={13} /></a>
+            <a href={`mailto:${LINKS.email}?subject=Resume%20request`}>Request resume</a>
+          </div>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────────
-   FOOTER
-   ───────────────────────────────────────────── */
 function Footer() {
   return (
-    <footer style={{
-      padding: '24px clamp(24px, 5vw, 80px)',
-      borderTop: `1px solid ${T.rule}`,
-    }}>
-      <div style={{
-        maxWidth: 1200, margin: '0 auto',
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        flexWrap: 'wrap', gap: 16,
-      }}>
-        <span style={{
-          fontFamily: T.sans, fontSize: 13, color: T.inkMuted, fontWeight: 300,
-        }}>&copy; {new Date().getFullYear()} Sultan Dayani. Built in Frankfurt.</span>
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{
-            background: 'none', border: `1px solid ${T.rule}`,
-            padding: '8px 20px', cursor: 'pointer',
-            fontFamily: T.mono, fontSize: 11, color: T.inkMuted,
-            letterSpacing: '0.06em', textTransform: 'uppercase',
-            transition: 'border-color 0.3s, color 0.3s',
-          }}
-          onMouseEnter={e => { e.target.style.borderColor = T.accent; e.target.style.color = T.accent; }}
-          onMouseLeave={e => { e.target.style.borderColor = T.rule; e.target.style.color = T.inkMuted; }}
-        >Back to Top</button>
+    <footer className="footer">
+      <div className="footer__inner shell">
+        <p>© {new Date().getFullYear()} Sultan Dayani <span>Frankfurt, Germany</span></p>
+        <nav aria-label="Footer navigation">
+          <a href="#top">Top</a>
+          <a href="#experience">Experience</a>
+          <a href="#work">Case studies</a>
+          <a href="#contact">Contact</a>
+        </nav>
       </div>
     </footer>
   );
 }
 
-/* ─────────────────────────────────────────────
-   GLOBAL STYLES (injected via <style>)
-   ───────────────────────────────────────────── */
-function GlobalStyles() {
-  return (
-    <style>{`
-      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-      html {
-        scroll-behavior: smooth;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      body {
-        background: ${T.bg};
-        color: ${T.ink};
-        font-family: ${T.sans};
-        overflow-x: hidden;
-      }
-
-      ::selection {
-        background: ${T.accent};
-        color: #fff;
-      }
-
-      @keyframes scrollPulse {
-        0%, 100% { opacity: 1; transform: scaleY(1); }
-        50% { opacity: 0.3; transform: scaleY(0.6); }
-      }
-
-      /* Responsive nav */
-      @media (max-width: 768px) {
-        .nav-desktop { display: none !important; }
-        .nav-mobile-toggle { display: block !important; }
-
-      }
-      @media (min-width: 769px) {
-        .nav-mobile-menu { display: none !important; }
-      }
-
-      /* Smooth scrollbar */
-      ::-webkit-scrollbar { width: 8px; }
-      ::-webkit-scrollbar-track { background: ${T.bg}; }
-      ::-webkit-scrollbar-thumb { background: ${T.rule}; border-radius: 4px; }
-      ::-webkit-scrollbar-thumb:hover { background: ${T.inkMuted}; }
-
-      /* Focus visible for accessibility */
-      *:focus-visible {
-        outline: 2px solid ${T.accent};
-        outline-offset: 2px;
-      }
-    `}</style>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   APP
-   ───────────────────────────────────────────── */
 export default function App() {
+  useEffect(() => {
+    const sectionId = window.location.hash.slice(1);
+    const section = sectionId ? document.getElementById(sectionId) : null;
+    section?.scrollIntoView?.({ behavior: 'instant', block: 'start' });
+  }, []);
+
   return (
     <>
-      <GlobalStyles />
-      <GrainOverlay />
-      <Nav />
-      <main>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <Navigation />
+      <main id="main-content">
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
+        <Leadership />
+        <Work />
         <Contact />
       </main>
       <Footer />
