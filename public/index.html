@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#102d34" />
+    <meta name="theme-color" content="#f6f7f5" />
     <meta name="color-scheme" content="light" />
     <meta name="robots" content="index, follow" />
 
@@ -41,7 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Manrope:wght@400;500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Sora:wght@400;500;600&amp;display=swap"
       rel="stylesheet"
     />
 
@@ -74,57 +74,51 @@
 
     <style>
       .static-fallback {
-        background: #eef3f2;
-        color: #102d34;
-        font-family: Arial, sans-serif;
+        background: #f6f7f5;
+        color: #1b2421;
+        font-family: Manrope, Arial, sans-serif;
         line-height: 1.6;
         margin: 0;
         min-height: 100vh;
         padding: 8vw;
       }
-      .static-fallback nav { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 10vh; }
-      .static-fallback a { color: #086b65; }
-      .static-fallback h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: 0.95; margin-bottom: 1rem; }
-      .static-fallback h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-top: 4rem; }
-      .static-fallback p, .static-fallback li { max-width: 55rem; }
-      .static-fallback__role { font-size: 1.2rem; font-weight: 700; }
+      .static-fallback nav { border-bottom: 1px solid #d8ddd9; display: flex; flex-wrap: wrap; gap: 1.5rem; padding-bottom: 1.25rem; }
+      .static-fallback a { color: #245e4b; text-underline-offset: 0.35rem; }
+      .static-fallback h1 { font-family: Sora, Arial, sans-serif; font-size: clamp(3.5rem, 9vw, 7rem); letter-spacing: -0.07em; line-height: 0.95; margin: 1.5rem 0; }
+      .static-fallback h2 { font-family: Sora, Arial, sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.05em; margin-top: 5rem; }
+      .static-fallback h3 { font-family: Sora, Arial, sans-serif; margin-top: 2.5rem; }
+      .static-fallback p { max-width: 48rem; }
+      .static-fallback__role { color: #245e4b; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; margin-top: 12vh; text-transform: uppercase; }
     </style>
   </head>
   <body>
     <div id="root">
       <main class="static-fallback">
         <nav aria-label="Portfolio navigation">
-          <a href="#static-experience">Experience</a>
-          <a href="#static-work">Case studies</a>
+          <a href="#static-work">Work</a>
+          <a href="#static-open-source">Open source</a>
           <a href="mailto:contact@sultandayani.com">Contact</a>
-          <a href="https://www.linkedin.com/in/sultan-dayani-3419a01b1">LinkedIn</a>
-          <a href="https://github.com/TheLoop705">GitHub</a>
         </nav>
         <p class="static-fallback__role">Technical Lead &amp; Software Engineer</p>
         <h1>Sultan Dayani</h1>
-        <p>AI Enablement · Developer Experience · Cloud Platforms</p>
-        <p>
-          I design production AI capabilities, modernize engineering platforms, and help development teams adopt new tools and practices effectively.
-        </p>
-
-        <section id="static-experience">
-          <h2>Technical Leadership &amp; Enablement</h2>
-          <ul>
-            <li>Technical Lead responsibility, roadmap and backlog ownership for a new product.</li>
-            <li>Architecture decisions, ADRs and reusable engineering guidelines.</li>
-            <li>Onboarding and continuous mentoring of three engineers.</li>
-            <li>Company-wide AI pilot work covering tool evaluation, governance and responsible adoption.</li>
-          </ul>
-        </section>
+        <p>I build production AI systems and the cloud platforms teams need to own them.</p>
+        <p>Frankfurt, Germany · AI enablement · Developer experience · Cloud platforms</p>
 
         <section id="static-work">
-          <h2>Selected case studies</h2>
-          <h3>Production LLM capability for an aviation transcription product</h3>
-          <p>A Python AI service with managed prompts, structured outputs, transcript summaries and focused human-review signals.</p>
+          <h2>Selected work</h2>
+          <h3>LLM capability for an aviation transcription product</h3>
+          <p>Technical design and leadership for a workflow that turns transcripts into summaries and focused human-review signals.</p>
           <h3>Cloud deployment toolchain modernization</h3>
-          <p>A transition from shell-driven CloudFormation to reusable AWS CDK components integrating EKS, Helm and Kubernetes.</p>
-          <h3>OpenTelemetry observability reference platform</h3>
-          <p>Pulse is a containerized metrics, traces and logs stack using OpenTelemetry, Prometheus, Jaeger, OpenSearch and Grafana.</p>
+          <p>A move from shell-driven CloudFormation to reusable AWS CDK components integrating EKS, Helm and Kubernetes.</p>
+        </section>
+
+        <section id="static-open-source">
+          <h2>Open-source lab</h2>
+          <h3>Investment Research Agent</h3>
+          <p>A local-first research pipeline that creates structured market digests and publishes an inspectable dashboard.</p>
+          <a href="https://theloop705.github.io/investment-research-agent/">Open live system</a>
+          <h3>Pulse Observability</h3>
+          <p>A containerized OpenTelemetry environment for exploring metrics, traces and logs.</p>
           <a href="https://github.com/TheLoop705/pulse-observability">View Pulse on GitHub</a>
         </section>
       </main>
