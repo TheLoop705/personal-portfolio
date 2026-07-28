@@ -7,6 +7,7 @@ const LINKS = {
   investmentLive: 'https://theloop705.github.io/investment-research-agent/',
   investmentSource: 'https://github.com/TheLoop705/investment-research-agent',
   linkedin: 'https://www.linkedin.com/in/sultan-dayani-3419a01b1',
+  paia: 'https://github.com/TheLoop705/paia',
   portfolioSource: 'https://github.com/TheLoop705/personal-portfolio',
   pulse: 'https://github.com/TheLoop705/pulse-observability',
 };
@@ -186,6 +187,38 @@ function Work() {
 
 const openSourceProjects = [
   {
+    category: 'Personal AI platform',
+    context: 'Open source',
+    title: 'PAIA',
+    description: 'A local-first personal AI system that brings projects, finance, calendars, life admin and consultancy workflows into one modular iPhone experience backed by infrastructure the user controls.',
+    meta: 'Swift 6 · SwiftUI · Vapor · PostgreSQL · Hermes Agent',
+    links: [
+      { href: LINKS.paia, label: 'View source' },
+    ],
+    screenshots: [
+      {
+        alt: 'PAIA finance screen showing a synthetic monthly fixed-cost plan',
+        label: 'Finance',
+        src: '/projects/paia/finance.png',
+      },
+      {
+        alt: 'PAIA project screen showing a synthetic oak workbench project',
+        label: 'Projects',
+        src: '/projects/paia/projects.png',
+      },
+      {
+        alt: 'PAIA calendar screen showing a synthetic weekly schedule',
+        label: 'Calendar',
+        src: '/projects/paia/calendar.png',
+      },
+      {
+        alt: 'PAIA consultancy screen showing a synthetic engagement workspace',
+        label: 'Consultancy',
+        src: '/projects/paia/consultancy.png',
+      },
+    ],
+  },
+  {
     category: 'AI automation',
     context: 'Open source',
     title: 'Investment Research Agent',
@@ -220,6 +253,29 @@ function OpenSourceLab() {
       <div className="work-list">
         {openSourceProjects.map((project) => (
           <WorkEntry key={project.title} project={project}>
+            {project.screenshots && (
+              <div aria-label={`${project.title} screenshots`} className="project-gallery">
+                {project.screenshots.map((screenshot) => (
+                  <figure key={screenshot.src}>
+                    <a
+                      aria-label={`Open full-size ${screenshot.label} screenshot`}
+                      href={screenshot.src}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        alt={screenshot.alt}
+                        height="874"
+                        loading="lazy"
+                        src={screenshot.src}
+                        width="402"
+                      />
+                    </a>
+                    <figcaption>{screenshot.label}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
             <div className="work-entry__links">
               {project.links.map((link) => (
                 <a href={link.href} key={link.label} rel="noreferrer" target="_blank">
