@@ -4,8 +4,6 @@ import './App.css';
 const LINKS = {
   email: 'contact@sultandayani.com',
   github: 'https://github.com/TheLoop705',
-  investmentLive: 'https://theloop705.github.io/investment-research-agent/',
-  investmentSource: 'https://github.com/TheLoop705/investment-research-agent',
   linkedin: 'https://www.linkedin.com/in/sultan-dayani-3419a01b1',
   paia: 'https://github.com/TheLoop705/paia',
   portfolioSource: 'https://github.com/TheLoop705/personal-portfolio',
@@ -217,17 +215,6 @@ const openSourceProjects = [
         label: 'Consultancy',
         src: '/projects/paia/consultancy.png',
       },
-    ],
-  },
-  {
-    category: 'AI automation',
-    context: 'Open source',
-    title: 'Investment Research Agent',
-    description: 'A local-first research pipeline that collects market signals, creates structured digests and publishes an inspectable dashboard.',
-    meta: 'Python · FastAPI · GitHub Actions · Static publishing',
-    links: [
-      { href: LINKS.investmentLive, label: 'Open live system' },
-      { href: LINKS.investmentSource, label: 'View source' },
     ],
   },
   {
