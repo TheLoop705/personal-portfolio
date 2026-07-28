@@ -403,6 +403,49 @@ svg {
   margin-top: 22px;
 }
 
+.project-diagrams {
+  display: grid;
+  gap: 26px;
+  margin-top: 30px;
+}
+
+.project-diagrams figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.project-diagrams a {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  display: block;
+  overflow: hidden;
+}
+
+.project-diagrams a:focus-visible {
+  outline-offset: 3px;
+}
+
+.project-diagrams img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.project-diagrams figcaption {
+  color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.66rem;
+  font-weight: 600;
+  gap: 6px 18px;
+  justify-content: space-between;
+  margin-top: 9px;
+}
+
+.project-diagrams a:hover + figcaption {
+  color: var(--ink);
+}
+
 .project-gallery {
   display: grid;
   gap: 12px;
@@ -677,5 +720,9 @@ svg {
 
   .project-gallery img {
     transition: none;
+  }
+
+  .project-diagrams figure {
+    break-inside: avoid;
   }
 }

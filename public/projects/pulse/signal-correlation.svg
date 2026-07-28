@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="760" viewBox="0 0 1450 760" font-family="'Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#44546a"/></marker></defs>
+<rect width="1450" height="760" fill="#ffffff"/>
+<text x="40" y="43.2" fill="#172b3a" font-size="21" text-anchor="start" font-weight="600" xml:space="preserve">Pulse — How One Request Becomes Three Correlated Signals</text>
+<text x="40" y="65.8" fill="#5b6b7b" font-size="12" text-anchor="start" xml:space="preserve">The Java agent stamps the same W3C trace context on metrics, spans and log records — which is what makes cross-signal navigation possible.</text>
+<rect x="40" y="92" width="620" height="548" fill="#f7f9fb" stroke="#c9d3de" stroke-width="1"/>
+<rect x="40" y="92" width="620" height="26" fill="#14375a" stroke="#14375a" stroke-width="1"/>
+<text x="350" y="108.0" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="600" xml:space="preserve">1 — ONE REQUEST, ONE TRACE</text>
+<rect x="700" y="92" width="350" height="548" fill="#f7f9fb" stroke="#c9d3de" stroke-width="1"/>
+<rect x="700" y="92" width="350" height="26" fill="#14375a" stroke="#14375a" stroke-width="1"/>
+<text x="875" y="108.0" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="600" xml:space="preserve">2 — THREE SIGNALS, ONE TRACE ID</text>
+<rect x="1090" y="92" width="320" height="548" fill="#f7f9fb" stroke="#c9d3de" stroke-width="1"/>
+<rect x="1090" y="92" width="320" height="26" fill="#14375a" stroke="#14375a" stroke-width="1"/>
+<text x="1250" y="108.0" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="600" xml:space="preserve">3 — CORRELATION IN GRAFANA</text>
+<text x="64" y="150.7" fill="#14375a" font-size="13" text-anchor="start" font-weight="600" xml:space="preserve">POST /api/orders/{id}/notify</text>
+<text x="64" y="168.2" fill="#5b6b7b" font-size="10" text-anchor="start" xml:space="preserve">auto-instrumented by the OTel Java Agent — no code in the app knows about tracing</text>
+<text x="80" y="194.2" fill="#1f4e79" font-size="10" text-anchor="start" font-weight="600" xml:space="preserve">SERVER  ·  POST /api/orders/{id}/notify</text>
+<rect x="80" y="200" width="540" height="22" fill="#deebf7" stroke="#2e75b6" stroke-width="1"/>
+<text x="88" y="214.2" fill="#1f4e79" font-size="10" text-anchor="start" xml:space="preserve">~1 000 ms total</text>
+<text x="96.2" y="246.2" fill="#1f5c6e" font-size="10" text-anchor="start" font-weight="600" xml:space="preserve">INTERNAL  ·  OrderService.getOrder</text>
+<rect x="96.2" y="252" width="145.8" height="22" fill="#ddeff3" stroke="#31859c" stroke-width="1"/>
+<text x="104.2" y="266.2" fill="#1f5c6e" font-size="10" text-anchor="start" xml:space="preserve">10–300 ms</text>
+<text x="247.4" y="298.2" fill="#833c05" font-size="10" text-anchor="start" font-weight="600" xml:space="preserve">INTERNAL  ·  NotificationService.sendNotification</text>
+<rect x="247.4" y="304" width="345.6" height="22" fill="#fbe5d6" stroke="#c55a11" stroke-width="1"/>
+<text x="255.4" y="318.2" fill="#833c05" font-size="10" text-anchor="start" xml:space="preserve">300–700 ms</text>
+<ellipse cx="593" cy="315" rx="11" ry="11" fill="#c00000" stroke="#c00000" stroke-width="1"/>
+<text x="593" y="317.8" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="600" xml:space="preserve">!</text>
+<text x="300" y="348.2" fill="#c00000" font-size="10" text-anchor="start" xml:space="preserve">~20% of notifications throw → span status ERROR, HTTP 503, ERROR log record</text>
+<polyline points="80,372 630,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="80,366 80,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter"/>
+<text x="80" y="385.4" fill="#5b6b7b" font-size="9" text-anchor="middle" xml:space="preserve">0 ms</text>
+<polyline points="215,366 215,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter"/>
+<text x="215" y="385.4" fill="#5b6b7b" font-size="9" text-anchor="middle" xml:space="preserve">250 ms</text>
+<polyline points="350,366 350,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter"/>
+<text x="350" y="385.4" fill="#5b6b7b" font-size="9" text-anchor="middle" xml:space="preserve">500 ms</text>
+<polyline points="485,366 485,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter"/>
+<text x="485" y="385.4" fill="#5b6b7b" font-size="9" text-anchor="middle" xml:space="preserve">750 ms</text>
+<polyline points="620,366 620,372" fill="none" stroke="#9aa7b3" stroke-width="1" stroke-linejoin="miter"/>
+<text x="620" y="385.4" fill="#5b6b7b" font-size="9" text-anchor="middle" xml:space="preserve">1000 ms</text>
+<rect x="64" y="420" width="566" height="116" fill="#f2f2f2" stroke="#7f7f7f" stroke-width="1"/>
+<rect x="64" y="420" width="566" height="5" fill="#7f7f7f" stroke="#7f7f7f" stroke-width="1"/>
+<text x="76" y="444.8" fill="#404040" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">W3C trace context, propagated for free</text>
+<text x="76" y="462.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01</text>
+<text x="76" y="477.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve"></text>
+<text x="76" y="492.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">The agent injects trace_id / span_id into the logging MDC and onto every</text>
+<text x="76" y="508.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">span, and exposes them as exemplars on the latency histogram.</text>
+<text x="64" y="564.2" fill="#5b6b7b" font-size="10" text-anchor="start" xml:space="preserve">Because the identifier is identical across all three signals, a spike in a</text>
+<text x="64" y="576.7" fill="#5b6b7b" font-size="10" text-anchor="start" xml:space="preserve">Grafana panel and a single ERROR log line are two views of the same request.</text>
+<rect x="716" y="150" width="318" height="140" fill="#e2efda" stroke="#548235" stroke-width="1"/>
+<rect x="716" y="150" width="318" height="5" fill="#548235" stroke="#548235" stroke-width="1"/>
+<text x="728" y="174.8" fill="#375623" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Metrics  →  Prometheus</text>
+<text x="728" y="192.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">http.server.request.duration</text>
+<text x="728" y="207.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">http_route = /api/orders/{id}/notify</text>
+<text x="728" y="222.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">http_response_status_code = 503</text>
+<text x="728" y="238.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">→ histogram buckets, rate(), quantiles</text>
+<rect x="716" y="320" width="318" height="140" fill="#e2efda" stroke="#548235" stroke-width="1"/>
+<rect x="716" y="320" width="318" height="5" fill="#548235" stroke="#548235" stroke-width="1"/>
+<text x="728" y="344.8" fill="#375623" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Traces  →  Jaeger</text>
+<text x="728" y="362.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">3 spans, parent/child linked</text>
+<text x="728" y="377.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">span.status = ERROR</text>
+<text x="728" y="392.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">exception.type / exception.message</text>
+<text x="728" y="408.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">→ where the latency actually went</text>
+<rect x="716" y="490" width="318" height="140" fill="#e2efda" stroke="#548235" stroke-width="1"/>
+<rect x="716" y="490" width="318" height="5" fill="#548235" stroke="#548235" stroke-width="1"/>
+<text x="728" y="514.8" fill="#375623" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Logs  →  OpenSearch</text>
+<text x="728" y="532.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">&quot;Notification failed for order id=…&quot;</text>
+<text x="728" y="547.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">severity = ERROR, trace_id attached</text>
+<text x="728" y="562.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">filtered: everything below INFO dropped</text>
+<text x="728" y="578.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">→ full-text search over the message</text>
+<polyline points="630,478 678,478 678,220 716,220" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="630,478 678,478 678,390 716,390" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="630,478 678,478 678,560 716,560" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<rect x="1106" y="150" width="288" height="130" fill="#fbe5d6" stroke="#c55a11" stroke-width="1"/>
+<rect x="1106" y="150" width="288" height="5" fill="#c55a11" stroke="#c55a11" stroke-width="1"/>
+<text x="1118" y="174.8" fill="#833c05" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Grafana</text>
+<text x="1118" y="192.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Prometheus + Jaeger + OpenSearch</text>
+<text x="1118" y="207.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">datasources provisioned at startup</text>
+<text x="1118" y="222.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">5 dashboards, no manual setup</text>
+<rect x="1106" y="340" width="288" height="118" fill="#eae2f4" stroke="#7030a0" stroke-width="1"/>
+<rect x="1106" y="340" width="288" height="5" fill="#7030a0" stroke="#7030a0" stroke-width="1"/>
+<text x="1118" y="364.8" fill="#4b2072" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Metric spike → trace</text>
+<text x="1118" y="382.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Latency panel shows P95 climbing.</text>
+<text x="1118" y="397.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Pick the offending time window,</text>
+<text x="1118" y="412.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">open the matching trace in Jaeger</text>
+<text x="1118" y="428.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">and see which span burned the time.</text>
+<rect x="1106" y="490" width="288" height="118" fill="#eae2f4" stroke="#7030a0" stroke-width="1"/>
+<rect x="1106" y="490" width="288" height="5" fill="#7030a0" stroke="#7030a0" stroke-width="1"/>
+<text x="1118" y="514.8" fill="#4b2072" font-size="12" text-anchor="start" font-weight="600" xml:space="preserve">Error log → trace</text>
+<text x="1118" y="532.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">An ERROR log line carries trace_id.</text>
+<text x="1118" y="547.7" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Search it in OpenSearch, then pull</text>
+<text x="1118" y="562.9" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">up the exact request that produced</text>
+<text x="1118" y="578.0" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">it — no guessing by timestamp.</text>
+<polyline points="1034,220 1072,220 1072,195 1106,195" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="1034,390 1072,390 1072,215 1106,215" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="1034,560 1072,560 1072,235 1106,235" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="1250,280 1250,340" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<polyline points="1250,458 1250,490" fill="none" stroke="#44546a" stroke-width="1.5" stroke-linejoin="miter" marker-end="url(#ah)"/>
+<rect x="40" y="690" width="11" height="11" fill="#deebf7" stroke="#2e75b6" stroke-width="1"/>
+<text x="57" y="697.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Request / span</text>
+<rect x="159.85000000000002" y="690" width="11" height="11" fill="#ddeff3" stroke="#31859c" stroke-width="1"/>
+<text x="176.85000000000002" y="697.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Child span</text>
+<rect x="256.6" y="690" width="11" height="11" fill="#fbe5d6" stroke="#c55a11" stroke-width="1"/>
+<text x="273.6" y="697.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Failing dependency</text>
+<rect x="399.55" y="690" width="11" height="11" fill="#e2efda" stroke="#548235" stroke-width="1"/>
+<text x="416.55" y="697.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Signal store</text>
+<rect x="507.85" y="690" width="11" height="11" fill="#eae2f4" stroke="#7030a0" stroke-width="1"/>
+<text x="524.85" y="697.6" fill="#5b6b7b" font-size="10.5" text-anchor="start" xml:space="preserve">Investigation path</text>
+<text x="40" y="740.2" fill="#93a1ad" font-size="10" text-anchor="start" xml:space="preserve">pulse-observability · docs/diagrams/04-signal-correlation.excalidraw · regenerate with `node tools/diagrams/build.mjs`</text>
+</svg>

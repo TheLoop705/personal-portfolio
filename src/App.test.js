@@ -50,6 +50,27 @@ describe('professional portfolio', () => {
     );
   });
 
+  test('shows the Pulse architecture diagrams and documentation link', () => {
+    render(<App />);
+
+    expect(screen.getByRole('link', { name: /Open the full-size diagram: System architecture/i })).toHaveAttribute(
+      'href',
+      '/projects/pulse/system-architecture.svg',
+    );
+    expect(screen.getByAltText(/Layered architecture diagram/i)).toHaveAttribute(
+      'src',
+      '/projects/pulse/system-architecture.svg',
+    );
+    expect(screen.getByAltText(/one HTTP request broken into spans/i)).toHaveAttribute(
+      'src',
+      '/projects/pulse/signal-correlation.svg',
+    );
+    expect(screen.getByRole('link', { name: /Read the architecture/i })).toHaveAttribute(
+      'href',
+      'https://github.com/TheLoop705/pulse-observability/blob/master/docs/architecture.md',
+    );
+  });
+
   test('links to the portfolio source and resume request', () => {
     render(<App />);
 

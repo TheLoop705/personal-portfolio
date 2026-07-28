@@ -10,6 +10,7 @@ const LINKS = {
   paia: 'https://github.com/TheLoop705/paia',
   portfolioSource: 'https://github.com/TheLoop705/personal-portfolio',
   pulse: 'https://github.com/TheLoop705/pulse-observability',
+  pulseArchitecture: 'https://github.com/TheLoop705/pulse-observability/blob/master/docs/architecture.md',
 };
 
 function ArrowUpRight({ size = 15 }) {
@@ -231,12 +232,30 @@ const openSourceProjects = [
   },
   {
     category: 'Observability',
-    context: 'Reference platform',
+    context: 'Reference architecture',
     title: 'Pulse Observability',
-    description: 'A containerized environment for exploring metrics, traces and logs through one coherent OpenTelemetry path.',
-    meta: 'OpenTelemetry · Prometheus · Jaeger · OpenSearch · Grafana',
+    description: 'A self-hosted OpenTelemetry stack built around one architectural constraint: an application depends on a single protocol and nothing else. Metrics, traces and logs arrive correlated by trace ID, and every storage backend behind the collector can be replaced without touching a service.',
+    meta: 'OpenTelemetry Collector · Prometheus · Jaeger · OpenSearch · Grafana · Docker Compose',
+    note: 'Eight containers, five provisioned dashboards, no application code changes — the whole stack comes up from a clean checkout with one command.',
     links: [
+      { href: LINKS.pulseArchitecture, label: 'Read the architecture' },
       { href: LINKS.pulse, label: 'View source' },
+    ],
+    diagrams: [
+      {
+        alt: 'Layered architecture diagram: instrumented applications send OTLP to an OpenTelemetry Collector, which exports metrics to Prometheus, traces to Jaeger and logs to OpenSearch, all queried through Grafana',
+        caption: 'System architecture — four layers, one direction of dependency',
+        height: 780,
+        src: '/projects/pulse/system-architecture.svg',
+        width: 1450,
+      },
+      {
+        alt: 'Diagram showing one HTTP request broken into spans, emitting metrics, traces and logs that share a single trace ID, and the two investigation paths this opens in Grafana',
+        caption: 'Signal correlation — one request, three signals, one trace ID',
+        height: 760,
+        src: '/projects/pulse/signal-correlation.svg',
+        width: 1450,
+      },
     ],
   },
 ];
@@ -253,6 +272,32 @@ function OpenSourceLab() {
       <div className="work-list">
         {openSourceProjects.map((project) => (
           <WorkEntry key={project.title} project={project}>
+            {project.diagrams && (
+              <div aria-label={`${project.title} architecture diagrams`} className="project-diagrams">
+                {project.diagrams.map((diagram) => (
+                  <figure key={diagram.src}>
+                    <a
+                      aria-label={`Open the full-size diagram: ${diagram.caption}`}
+                      href={diagram.src}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <img
+                        alt={diagram.alt}
+                        height={diagram.height}
+                        loading="lazy"
+                        src={diagram.src}
+                        width={diagram.width}
+                      />
+                    </a>
+                    <figcaption>
+                      <span>{diagram.caption}</span>
+                      <span aria-hidden="true">Open full size ↗</span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            )}
             {project.screenshots && (
               <div aria-label={`${project.title} screenshots`} className="project-gallery">
                 {project.screenshots.map((screenshot) => (
