@@ -29,15 +29,24 @@ describe('professional portfolio', () => {
     render(<App />);
 
     expect(screen.getByRole('heading', { name: /Public systems, available to inspect/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'PAIA' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Investment Research Agent/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Pulse Observability/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Open full-size Finance screenshot/i })).toHaveAttribute(
+      'href',
+      '/projects/paia/finance.png',
+    );
+    expect(screen.getByAltText(/PAIA calendar screen/i)).toHaveAttribute(
+      'src',
+      '/projects/paia/calendar.png',
+    );
     expect(screen.getByRole('link', { name: /Open live system/i })).toHaveAttribute(
       'href',
       'https://theloop705.github.io/investment-research-agent/',
     );
     expect(screen.getAllByRole('link', { name: /View source/i })[0]).toHaveAttribute(
       'href',
-      'https://github.com/TheLoop705/investment-research-agent',
+      'https://github.com/TheLoop705/paia',
     );
   });
 

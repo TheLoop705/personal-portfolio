@@ -403,6 +403,47 @@ svg {
   margin-top: 22px;
 }
 
+.project-gallery {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 30px;
+}
+
+.project-gallery figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.project-gallery a {
+  background: #eef0ed;
+  border: 1px solid var(--line);
+  display: block;
+  overflow: hidden;
+}
+
+.project-gallery a:focus-visible {
+  outline-offset: 3px;
+}
+
+.project-gallery img {
+  display: block;
+  height: auto;
+  transition: transform 180ms ease;
+  width: 100%;
+}
+
+.project-gallery a:hover img {
+  transform: scale(1.018);
+}
+
+.project-gallery figcaption {
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 600;
+  margin-top: 9px;
+}
+
 .contact {
   border-top: 1px solid var(--line);
   padding-bottom: clamp(96px, 13vw, 150px);
@@ -542,6 +583,10 @@ svg {
     padding-top: 0;
   }
 
+  .project-gallery {
+    gap: 10px;
+  }
+
   .contact h2 {
     font-size: clamp(2.55rem, 12vw, 4rem);
   }
@@ -573,6 +618,20 @@ svg {
     align-items: flex-start;
     flex-direction: column;
     gap: 2px;
+  }
+
+  .project-gallery {
+    grid-auto-columns: minmax(148px, 48vw);
+    grid-auto-flow: column;
+    grid-template-columns: none;
+    margin-inline: -19px;
+    overflow-x: auto;
+    padding-inline: 19px;
+    scroll-snap-type: x mandatory;
+  }
+
+  .project-gallery figure {
+    scroll-snap-align: start;
   }
 
 }
@@ -614,5 +673,9 @@ svg {
   .work-entry,
   .scope {
     break-inside: avoid;
+  }
+
+  .project-gallery img {
+    transition: none;
   }
 }
