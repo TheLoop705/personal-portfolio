@@ -139,9 +139,35 @@ const professionalWork = [
   },
 ];
 
+const optionsWorkstation = {
+  id: 'options-workstation',
+  category: 'Desktop research product',
+  context: 'Independent product build',
+  title: 'Options Workstation',
+  description: 'Designed and built a local-first workstation that turns unusual options flow into auditable research dossiers, portfolio-risk context and fail-closed paper-trading controls.',
+  meta: 'C# · .NET 10 · Avalonia · SQLite · IBKR paper trading · xUnit',
+  note: 'The interface shown below uses deterministic synthetic market and portfolio data. No live account data, credentials or trading activity are displayed.',
+  screenshots: [
+    {
+      alt: 'Options Workstation flow dashboard showing synthetic option-flow rows, portfolio estimates and read-only broker controls',
+      label: 'Flow dashboard · deterministic simulation',
+      src: '/projects/options-workstation/flow-dashboard.png',
+      width: 1924,
+      height: 1397,
+    },
+    {
+      alt: 'Options Workstation research evidence desk showing a synthetic candidate queue and separate Observed, Computed, AI Interpreted and You lanes',
+      label: 'Research evidence desk · provenance-first review',
+      src: '/projects/options-workstation/research-evidence-desk.png',
+      width: 1924,
+      height: 1397,
+    },
+  ],
+};
+
 function WorkEntry({ project, children }) {
   return (
-    <article className="work-entry">
+    <article className="work-entry" id={project.id}>
       <div className="work-entry__label">
         <span>{project.category}</span>
         <span>{project.context}</span>
@@ -154,6 +180,37 @@ function WorkEntry({ project, children }) {
         {children}
       </div>
     </article>
+  );
+}
+
+function ProjectGallery({ project, variant = 'portrait' }) {
+  return (
+    <div
+      aria-label={`${project.title} screenshots`}
+      className={`project-gallery project-gallery--${variant}`}
+      role="group"
+    >
+      {project.screenshots.map((screenshot) => (
+        <figure key={screenshot.src}>
+          <a
+            aria-label={`Open full-size ${screenshot.label} screenshot`}
+            href={screenshot.src}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <img
+              alt={screenshot.alt}
+              decoding="async"
+              height={screenshot.height ?? 874}
+              loading="lazy"
+              src={screenshot.src}
+              width={screenshot.width ?? 402}
+            />
+          </a>
+          <figcaption>{screenshot.label}</figcaption>
+        </figure>
+      ))}
+    </div>
   );
 }
 
@@ -180,6 +237,9 @@ function Work() {
 
       <div className="work-list">
         {professionalWork.map((project) => <WorkEntry key={project.title} project={project} />)}
+        <WorkEntry project={optionsWorkstation}>
+          <ProjectGallery project={optionsWorkstation} variant="desktop" />
+        </WorkEntry>
       </div>
     </section>
   );
@@ -253,29 +313,7 @@ function OpenSourceLab() {
       <div className="work-list">
         {openSourceProjects.map((project) => (
           <WorkEntry key={project.title} project={project}>
-            {project.screenshots && (
-              <div aria-label={`${project.title} screenshots`} className="project-gallery">
-                {project.screenshots.map((screenshot) => (
-                  <figure key={screenshot.src}>
-                    <a
-                      aria-label={`Open full-size ${screenshot.label} screenshot`}
-                      href={screenshot.src}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      <img
-                        alt={screenshot.alt}
-                        height="874"
-                        loading="lazy"
-                        src={screenshot.src}
-                        width="402"
-                      />
-                    </a>
-                    <figcaption>{screenshot.label}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
+            {project.screenshots && <ProjectGallery project={project} />}
             <div className="work-entry__links">
               {project.links.map((link) => (
                 <a href={link.href} key={link.label} rel="noreferrer" target="_blank">
