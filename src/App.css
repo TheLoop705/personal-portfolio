@@ -340,6 +340,11 @@ svg {
   gap: clamp(34px, 7vw, 90px);
   grid-template-columns: 210px minmax(0, 1fr);
   padding-block: clamp(42px, 6vw, 62px);
+  scroll-margin-top: 92px;
+}
+
+.work-entry__body {
+  min-width: 0;
 }
 
 .work-entry__label {
@@ -453,6 +458,12 @@ svg {
   margin-top: 30px;
 }
 
+.project-gallery--desktop {
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
+  margin-top: 34px;
+}
+
 .project-gallery figure {
   margin: 0;
   min-width: 0;
@@ -484,6 +495,7 @@ svg {
   color: var(--muted);
   font-size: 0.66rem;
   font-weight: 600;
+  line-height: 1.5;
   margin-top: 9px;
 }
 
@@ -630,6 +642,10 @@ svg {
     gap: 10px;
   }
 
+  .project-gallery--desktop {
+    gap: 18px;
+  }
+
   .contact h2 {
     font-size: clamp(2.55rem, 12vw, 4rem);
   }
@@ -671,10 +687,15 @@ svg {
     overflow-x: auto;
     padding-inline: 19px;
     scroll-snap-type: x mandatory;
+    width: calc(100% + 38px);
   }
 
   .project-gallery figure {
     scroll-snap-align: start;
+  }
+
+  .project-gallery--desktop {
+    grid-auto-columns: minmax(82vw, 82vw);
   }
 
 }

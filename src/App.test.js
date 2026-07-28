@@ -25,6 +25,26 @@ describe('professional portfolio', () => {
     expect(screen.getByRole('heading', { name: /Cloud deployment toolchain modernization/i })).toBeInTheDocument();
   });
 
+  test('presents Options Workstation as an independent product with safe screenshots', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: 'Options Workstation' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Options Workstation' }).closest('article')).toHaveAttribute(
+      'id',
+      'options-workstation',
+    );
+    expect(screen.getByText(/deterministic synthetic market and portfolio data/i)).toBeInTheDocument();
+    expect(screen.getByRole('group', { name: /Options Workstation screenshots/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Open full-size Flow dashboard/i })).toHaveAttribute(
+      'href',
+      '/projects/options-workstation/flow-dashboard.png',
+    );
+    expect(screen.getByAltText(/research evidence desk/i)).toHaveAttribute(
+      'src',
+      '/projects/options-workstation/research-evidence-desk.png',
+    );
+  });
+
   test('presents the open-source projects with source links', () => {
     render(<App />);
 
