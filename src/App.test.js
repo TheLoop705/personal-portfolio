@@ -45,13 +45,16 @@ describe('professional portfolio', () => {
     );
   });
 
-  test('presents the open-source projects with source links', () => {
+  test('presents PAIA as a private project with synthetic screenshots', () => {
     render(<App />);
 
-    expect(screen.getByRole('heading', { name: /Public systems, available to inspect/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'PAIA' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Pulse Observability/i })).toBeInTheDocument();
-    expect(screen.queryByRole('heading', { name: /Investment Research Agent/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'PAIA' }).closest('article')).toHaveAttribute(
+      'id',
+      'paia',
+    );
+    expect(screen.getByText('Private project')).toBeInTheDocument();
+    expect(screen.getByText(/PAIA is currently a private project/i)).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Open full-size Finance screenshot/i })).toHaveAttribute(
       'href',
       '/projects/paia/finance.png',
@@ -60,9 +63,18 @@ describe('professional portfolio', () => {
       'src',
       '/projects/paia/calendar.png',
     );
+    expect(document.querySelector('a[href="https://github.com/TheLoop705/paia"]')).not.toBeInTheDocument();
+  });
+
+  test('presents the open-source projects with source links', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: /Public systems, available to inspect/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Pulse Observability/i })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Investment Research Agent/i })).not.toBeInTheDocument();
     expect(screen.getAllByRole('link', { name: /View source/i })[0]).toHaveAttribute(
       'href',
-      'https://github.com/TheLoop705/paia',
+      'https://github.com/TheLoop705/pulse-observability',
     );
   });
 

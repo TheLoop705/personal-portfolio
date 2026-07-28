@@ -5,7 +5,6 @@ const LINKS = {
   email: 'contact@sultandayani.com',
   github: 'https://github.com/TheLoop705',
   linkedin: 'https://www.linkedin.com/in/sultan-dayani-3419a01b1',
-  paia: 'https://github.com/TheLoop705/paia',
   portfolioSource: 'https://github.com/TheLoop705/personal-portfolio',
   pulse: 'https://github.com/TheLoop705/pulse-observability',
   pulseArchitecture: 'https://github.com/TheLoop705/pulse-observability/blob/master/docs/architecture.md',
@@ -164,6 +163,38 @@ const optionsWorkstation = {
   ],
 };
 
+const paia = {
+  id: 'paia',
+  category: 'Personal AI platform',
+  context: 'Private project',
+  title: 'PAIA',
+  description: 'A local-first personal AI system that brings projects, finance, calendars, life admin and consultancy workflows into one modular iPhone experience backed by infrastructure the user controls.',
+  meta: 'Swift 6 · SwiftUI · Vapor · PostgreSQL · Hermes Agent',
+  note: 'PAIA is currently a private project. The screenshots below use synthetic demo data.',
+  screenshots: [
+    {
+      alt: 'PAIA finance screen showing a synthetic monthly fixed-cost plan',
+      label: 'Finance',
+      src: '/projects/paia/finance.png',
+    },
+    {
+      alt: 'PAIA project screen showing a synthetic oak workbench project',
+      label: 'Projects',
+      src: '/projects/paia/projects.png',
+    },
+    {
+      alt: 'PAIA calendar screen showing a synthetic weekly schedule',
+      label: 'Calendar',
+      src: '/projects/paia/calendar.png',
+    },
+    {
+      alt: 'PAIA consultancy screen showing a synthetic engagement workspace',
+      label: 'Consultancy',
+      src: '/projects/paia/consultancy.png',
+    },
+  ],
+};
+
 function WorkEntry({ project, children }) {
   return (
     <article className="work-entry" id={project.id}>
@@ -239,44 +270,15 @@ function Work() {
         <WorkEntry project={optionsWorkstation}>
           <ProjectGallery project={optionsWorkstation} variant="desktop" />
         </WorkEntry>
+        <WorkEntry project={paia}>
+          <ProjectGallery project={paia} />
+        </WorkEntry>
       </div>
     </section>
   );
 }
 
 const openSourceProjects = [
-  {
-    category: 'Personal AI platform',
-    context: 'Open source',
-    title: 'PAIA',
-    description: 'A local-first personal AI system that brings projects, finance, calendars, life admin and consultancy workflows into one modular iPhone experience backed by infrastructure the user controls.',
-    meta: 'Swift 6 · SwiftUI · Vapor · PostgreSQL · Hermes Agent',
-    links: [
-      { href: LINKS.paia, label: 'View source' },
-    ],
-    screenshots: [
-      {
-        alt: 'PAIA finance screen showing a synthetic monthly fixed-cost plan',
-        label: 'Finance',
-        src: '/projects/paia/finance.png',
-      },
-      {
-        alt: 'PAIA project screen showing a synthetic oak workbench project',
-        label: 'Projects',
-        src: '/projects/paia/projects.png',
-      },
-      {
-        alt: 'PAIA calendar screen showing a synthetic weekly schedule',
-        label: 'Calendar',
-        src: '/projects/paia/calendar.png',
-      },
-      {
-        alt: 'PAIA consultancy screen showing a synthetic engagement workspace',
-        label: 'Consultancy',
-        src: '/projects/paia/consultancy.png',
-      },
-    ],
-  },
   {
     category: 'Observability',
     context: 'Reference architecture',
