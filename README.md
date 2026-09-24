@@ -2,6 +2,24 @@
 
 A focused, one-page portfolio positioning Sultan Dayani around technical leadership, AI enablement, developer experience, and cloud platforms.
 
+## Project imagery
+
+The recent-project section features Cartyators (`saas-autohandel`), Ekko, Grano Bar
+and Sattari Automobile, alongside the existing Options Workstation, PAIA and Pulse
+work. Screenshots were sourced from current Windows and Mac mini checkouts; the
+website previews show local versions, which may differ from their public deployments.
+
+Optimized WebP assets live under `public/projects/`. Source paths, demo-data checks
+and feature status are documented in `docs/project-sources-*.md`. App screenshots
+use demo or preview data. Cartyators' AI backend is opt-in and its native companion
+is in development; Ekko's music analytics are previews and dashboard edits currently
+stay in the companion app.
+
+Cartyators is a private repository. Its public architecture overview is exported
+as SVG from an editable Excalidraw scene; both are under
+`public/projects/saas-autohandel/architecture.*`. The page displays the diagram
+without separate full-size or download controls, or a link to private source code.
+
 ## Local development
 
 ```bash

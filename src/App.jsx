@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import RecentProjects from './RecentProjects';
 
 const LINKS = {
   email: 'contact@sultandayani.com',
@@ -57,6 +58,7 @@ function Navigation() {
         </button>
 
         <div className="nav-links" data-open={isOpen} id="primary-menu">
+          <a href="#projects" onClick={closeMenu}>Projects</a>
           <a href="#work" onClick={closeMenu}>Work</a>
           <a href="#open-source" onClick={closeMenu}>Open source</a>
           <a href="#contact" onClick={closeMenu}>Contact</a>
@@ -81,6 +83,7 @@ function Hero() {
       </div>
 
       <div className="hero__links">
+        <a href="#projects">Explore recent projects <span aria-hidden="true">↓</span></a>
         <a href="#work">View selected work <span aria-hidden="true">↓</span></a>
         <a href={`mailto:${LINKS.email}`}>Email me <ArrowUpRight /></a>
       </div>
@@ -405,6 +408,7 @@ export default function App() {
       <Navigation />
       <main id="main-content">
         <Hero />
+        <RecentProjects />
         <Work />
         <OpenSourceLab />
         <Contact />

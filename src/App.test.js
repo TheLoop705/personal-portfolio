@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 
 describe('professional portfolio', () => {
@@ -23,6 +23,20 @@ describe('professional portfolio', () => {
     expect(screen.getByText(/governance and company-wide adoption/i)).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /LLM capability for an aviation transcription product/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /Cloud deployment toolchain modernization/i })).toBeInTheDocument();
+  });
+
+  test('presents Cartyators as private while making its architecture available', () => {
+    render(<App />);
+
+    const project = screen.getByRole('article', { name: /Cartyators saas-autohandel/i });
+    expect(within(project).getByText('Private repository')).toBeInTheDocument();
+    expect(project.closest('#open-source')).toBeNull();
+    expect(within(project).getAllByRole('link').some((link) => link.href.includes('github.com'))).toBe(false);
+    expect(within(project).getByRole('link', { name: /Open full-size Cartyators architecture diagram/i })).toHaveAttribute(
+      'href', '/projects/saas-autohandel/architecture.svg',
+    );
+    expect(within(project).queryByRole('link', { name: /Open diagram in full size/i })).not.toBeInTheDocument();
+    expect(within(project).queryByRole('link', { name: /Download editable Excalidraw/i })).not.toBeInTheDocument();
   });
 
   test('presents Options Workstation as an independent product with safe screenshots', () => {
@@ -80,6 +94,8 @@ describe('professional portfolio', () => {
 
   test('shows the Pulse architecture diagrams and documentation link', () => {
     render(<App />);
+
+    expect(screen.queryByAltText(/Pulse Grafana dashboard/i)).not.toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: /Open the full-size diagram: System architecture/i })).toHaveAttribute(
       'href',

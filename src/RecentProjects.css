@@ -1,0 +1,391 @@
+.recent-projects .section-lead > p {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.project-index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 38px;
+  padding-bottom: 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.project-index a,
+.more-projects a {
+  align-items: center;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 600;
+  min-height: 44px;
+  text-decoration-color: var(--line);
+  text-underline-offset: 6px;
+}
+
+.project-index a:hover,
+.more-projects a:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+.recent-project,
+.website-project {
+  min-width: 0;
+  scroll-margin-top: 100px;
+}
+
+.recent-project {
+  padding-block: clamp(38px, 6vw, 64px);
+  border-bottom: 1px solid var(--line);
+}
+
+.recent-project__header {
+  align-items: end;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.recent-project__category {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+
+.recent-project h3,
+.website-project h3 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.recent-project h3 span {
+  color: var(--muted);
+  display: block;
+  font-family: var(--body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-top: 12px;
+}
+
+.project-visibility {
+  background: #e9eeeb;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--accent);
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin: 0 0 15px;
+  padding: 5px 9px;
+}
+
+.recent-project__intro {
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  margin: 0;
+  max-width: 50ch;
+}
+
+.recent-project__description {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+  margin: 20px 0 0;
+  max-width: 62ch;
+}
+
+.recent-project__stack {
+  color: var(--ink);
+  font-size: 0.73rem;
+  font-weight: 600;
+  line-height: 1.8;
+  margin: 25px 0 0;
+}
+
+.recent-project__note {
+  color: var(--muted);
+  font-size: 0.73rem;
+  line-height: 1.7;
+  margin: 10px 0 0;
+  max-width: 80ch;
+}
+
+.recent-screenshot {
+  margin: 0;
+  min-width: 0;
+}
+
+.recent-screenshot a {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  display: block;
+  overflow: hidden;
+}
+
+.recent-screenshot img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.recent-screenshot figcaption {
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
+.dealership-stage {
+  align-items: center;
+  background: #e8f0f5;
+  display: grid;
+  gap: clamp(18px, 3vw, 34px);
+  grid-template-columns: minmax(0, 3.3fr) minmax(0, 1fr);
+  padding: clamp(18px, 3vw, 34px);
+}
+
+.dealership-stage__web a {
+  border-radius: 5px;
+  box-shadow: 0 12px 32px #213b5010;
+}
+
+.dealership-stage__phone a,
+.ekko-stage a {
+  border-radius: clamp(14px, 2.5vw, 28px);
+  box-shadow: 0 12px 28px #202b3512;
+}
+
+.project-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 34px;
+}
+
+.project-features h4 {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.project-features p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  margin: 12px 0 0;
+}
+
+.project-details {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 12px;
+}
+
+.project-architecture {
+  border-top: 1px solid var(--line);
+  margin-top: 34px;
+  padding-top: 28px;
+}
+
+.project-architecture h4 {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.project-architecture > p {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.75;
+  margin: 12px 0 24px;
+  max-width: 76ch;
+}
+
+.architecture-figure {
+  margin: 0;
+}
+
+.architecture-figure__frame {
+  background: #fff;
+  border: 1px solid var(--line);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.architecture-figure__frame a {
+  display: block;
+}
+
+.architecture-figure img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.architecture-figure figcaption {
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.7;
+  margin-top: 12px;
+  max-width: 85ch;
+}
+
+.project-details summary {
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.6;
+  padding-block: 12px;
+}
+
+.project-details__gallery {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: 16px;
+}
+
+.ekko-project {
+  align-items: center;
+  display: grid;
+  gap: clamp(28px, 5vw, 60px);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.ekko-project__copy > .recent-project__intro {
+  margin-top: 24px;
+}
+
+.ekko-stage {
+  align-items: start;
+  background: #eeedf4;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 28px 22px;
+}
+
+.ekko-stage .recent-screenshot:last-child {
+  margin-top: 36px;
+}
+
+.website-projects {
+  display: grid;
+  gap: 44px 30px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: clamp(38px, 6vw, 64px);
+}
+
+.website-project h3 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+.website-project .recent-project__category {
+  margin-top: 26px;
+}
+
+.website-project .recent-screenshot a {
+  aspect-ratio: 2 / 1;
+}
+
+.website-project .recent-screenshot img {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.website-project .recent-screenshot figcaption {
+  margin-top: 9px;
+}
+
+.website-project .work-entry__links {
+  margin-top: 12px;
+}
+
+.more-projects {
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 35px;
+  margin-top: 54px;
+  padding-top: 28px;
+}
+
+.more-projects p {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin: 0;
+}
+
+.more-projects > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 26px;
+}
+
+@media (max-width: 760px) {
+  .architecture-figure__frame a {
+    min-width: 850px;
+  }
+
+  .recent-project__header,
+  .project-details__gallery,
+  .ekko-project,
+  .website-projects {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-features {
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-features p {
+    margin-top: 8px;
+  }
+
+  .dealership-stage {
+    gap: 22px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dealership-stage__phone {
+    justify-self: center;
+    width: min(52%, 210px);
+  }
+
+  .ekko-stage {
+    gap: 16px;
+    padding: 24px 18px;
+  }
+
+  .website-projects {
+    gap: 48px;
+  }
+
+  .project-index {
+    gap: 4px 22px;
+  }
+}
+
+@media print {
+  .recent-project,
+  .website-project {
+    break-inside: avoid;
+  }
+}
