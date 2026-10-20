@@ -1,0 +1,70 @@
+.image-viewer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 72px clamp(16px, 4vw, 64px) 24px;
+  background: transparent;
+  color: white;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.image-viewer::backdrop {
+  background: rgb(12 18 16 / 93%);
+}
+.image-viewer[open] {
+  display: grid;
+  place-items: center;
+}
+.image-viewer__close {
+  position: fixed;
+  top: 16px;
+  right: max(16px, env(safe-area-inset-right));
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ffffff50;
+  border-radius: 50%;
+  color: white;
+  background: #25312c;
+  cursor: pointer;
+}
+.image-viewer__close:hover {
+  background: #3c5046;
+}
+.image-viewer__close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
+}
+.image-viewer__figure {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+}
+.image-viewer__figure img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100dvh - 160px);
+  margin-inline: auto;
+  object-fit: contain;
+}
+.image-viewer__figure figcaption {
+  max-width: 85ch;
+  margin: 16px auto 0;
+  color: #d4ded8;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+}
+a[aria-haspopup="dialog"] {
+  cursor: zoom-in;
+}

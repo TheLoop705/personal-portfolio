@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import RecentProjects from './RecentProjects';
+import ImageViewerProvider, { ImageLink } from './ImageViewer';
 
 const LINKS = {
   email: 'contact@sultandayani.com',
@@ -225,11 +226,9 @@ function ProjectGallery({ project, variant = 'portrait' }) {
     >
       {project.screenshots.map((screenshot) => (
         <figure key={screenshot.src}>
-          <a
+          <ImageLink
             aria-label={`Open full-size ${screenshot.label} screenshot`}
             href={screenshot.src}
-            rel="noreferrer"
-            target="_blank"
           >
             <img
               alt={screenshot.alt}
@@ -239,7 +238,7 @@ function ProjectGallery({ project, variant = 'portrait' }) {
               src={screenshot.src}
               width={screenshot.width ?? 402}
             />
-          </a>
+          </ImageLink>
           <figcaption>{screenshot.label}</figcaption>
         </figure>
       ))}
@@ -328,11 +327,9 @@ function OpenSourceLab() {
               <div aria-label={`${project.title} architecture diagrams`} className="project-diagrams">
                 {project.diagrams.map((diagram) => (
                   <figure key={diagram.src}>
-                    <a
+                    <ImageLink
                       aria-label={`Open the full-size diagram: ${diagram.caption}`}
                       href={diagram.src}
-                      rel="noreferrer"
-                      target="_blank"
                     >
                       <img
                         alt={diagram.alt}
@@ -341,10 +338,10 @@ function OpenSourceLab() {
                         src={diagram.src}
                         width={diagram.width}
                       />
-                    </a>
+                    </ImageLink>
                     <figcaption>
                       <span>{diagram.caption}</span>
-                      <span aria-hidden="true">Open full size ↗</span>
+                      <span aria-hidden="true">Enlarge image</span>
                     </figcaption>
                   </figure>
                 ))}
@@ -403,7 +400,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <ImageViewerProvider>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navigation />
       <main id="main-content">
@@ -414,6 +411,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </ImageViewerProvider>
   );
 }

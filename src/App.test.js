@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 
 describe('professional portfolio', () => {
@@ -53,6 +53,45 @@ describe('professional portfolio', () => {
     fireEvent.click(within(carousel).getByRole('button', { name: 'Next project' }));
     expect(window.location.hash).toBe('#nova-iptv');
     expect(within(carousel).getByRole('link', { name: 'Nova IPTV' })).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('enlarges images in a dismissible dialog and restores focus and scrolling', () => {
+    render(<App />);
+    const imageLink = screen.getByRole('link', { name: /Open full-size Home and watch progress screenshot/i });
+    act(() => imageLink.focus());
+    expect(imageLink).not.toHaveAttribute('target');
+    fireEvent.click(imageLink);
+    let dialog = screen.getByRole('dialog', { name: 'Enlarged image' });
+    expect(within(dialog).getByRole('img')).toHaveAttribute('src', '/projects/nova-iptv/home.webp');
+    expect(within(dialog).getByRole('button', { name: 'Close enlarged image' })).toHaveFocus();
+    fireEvent.keyDown(dialog, { key: 'Tab' });
+    expect(within(dialog).getByRole('button', { name: 'Close enlarged image' })).toHaveFocus();
+    expect(document.body.style.overflow).toBe('hidden');
+    fireEvent.click(within(dialog).getByRole('img'));
+    expect(dialog).toBeInTheDocument();
+    fireEvent.keyDown(dialog, { key: 'Escape' });
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(document.body.style.overflow).toBe('');
+    expect(imageLink).toHaveFocus();
+
+    fireEvent.click(imageLink);
+    fireEvent.click(screen.getByRole('button', { name: 'Close enlarged image' }));
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    fireEvent.click(imageLink);
+    dialog = screen.getByRole('dialog');
+    fireEvent.click(dialog);
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  });
+
+  test('uses the same image viewer for work screenshots and architecture diagrams', () => {
+    render(<App />);
+    for (const name of [/Open full-size Flow dashboard/i, /Open the full-size diagram: System architecture/i]) {
+      const link = screen.getByRole('link', { name });
+      expect(link).not.toHaveAttribute('target');
+      fireEvent.click(link);
+      expect(within(screen.getByRole('dialog')).getByRole('img')).toHaveAttribute('src', link.getAttribute('href'));
+      fireEvent.click(screen.getByRole('button', { name: 'Close enlarged image' }));
+    }
   });
 
   test('supports keyboard selection and resets screenshot and details when switching projects', () => {

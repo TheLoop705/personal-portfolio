@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./RecentProjects.css";
+import { ImageLink, useImageViewer } from "./ImageViewer";
 import useCarouselPlayback, { SLIDE_DURATION } from "./useCarouselPlayback";
 
 const latestProjects = [
@@ -169,10 +170,8 @@ const websites = [
 function Screenshot({ src, alt, caption, width, height, className = "" }) {
   return (
     <figure className={`recent-screenshot ${className}`}>
-      <a
+      <ImageLink
         href={src}
-        target="_blank"
-        rel="noreferrer"
         aria-label={`Open full-size ${caption} screenshot`}
       >
         <img
@@ -183,7 +182,7 @@ function Screenshot({ src, alt, caption, width, height, className = "" }) {
           loading="lazy"
           decoding="async"
         />
-      </a>
+      </ImageLink>
       <figcaption>{caption}</figcaption>
     </figure>
   );
@@ -355,10 +354,8 @@ function CartyatorsDetails() {
             aria-label="Scrollable Cartyators architecture diagram"
             tabIndex={0}
           >
-            <a
+            <ImageLink
               href="/projects/saas-autohandel/architecture.svg"
-              target="_blank"
-              rel="noreferrer"
               aria-label="Open full-size Cartyators architecture diagram"
             >
               <img
@@ -369,7 +366,7 @@ function CartyatorsDetails() {
                 loading="lazy"
                 decoding="async"
               />
-            </a>
+            </ImageLink>
           </div>
           <figcaption>
             Private project. This overview combines current local
@@ -494,6 +491,7 @@ function ProjectExpose({ project, onDetailsChange }) {
 }
 
 export default function RecentProjects() {
+  const { isOpen: imageOpen } = useImageViewer();
   const [active, setActive] = useState(projectFromHash);
   const touchStart = useRef(null);
   const containerRef = useRef(null);
@@ -507,7 +505,7 @@ export default function RecentProjects() {
   const playback = useCarouselPlayback({
     containerRef,
     cycle,
-    reading,
+    reading: reading || imageOpen,
     onAdvance: () => select(active + 1, false),
   });
 

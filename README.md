@@ -13,6 +13,9 @@ hovered, focused, touched, outside the viewport, in a hidden tab or showing open
 details. A persistent pause control and reduced-motion support keep playback under
 the visitor's control. Short highlights stay visible; full descriptions,
 feature explanations and Cartyators' architecture expand on demand.
+Screenshots and diagrams enlarge in an on-page modal with a close button,
+Escape and backdrop dismissal. The viewer pauses the carousel, contains keyboard
+focus, locks background scrolling and returns focus to the image link on close.
 It also features Cartyators (`saas-autohandel`), Ekko, Grano Bar
 and Sattari Automobile, alongside the existing Options Workstation, PAIA and Pulse
 work. Screenshots were sourced from current Windows and Mac mini checkouts; the
