@@ -2,6 +2,8 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 
 describe('professional portfolio', () => {
+  beforeEach(() => window.history.replaceState(null, '', '/'));
+
   test('leads with a concise role, thesis and recruiter actions', () => {
     render(<App />);
 
@@ -28,7 +30,9 @@ describe('professional portfolio', () => {
   test('presents Cartyators as private while making its architecture available', () => {
     render(<App />);
 
+    fireEvent.click(screen.getByRole('link', { name: 'Cartyators' }));
     const project = screen.getByRole('article', { name: /Cartyators saas-autohandel/i });
+    fireEvent.click(within(project).getByText('Explore the project and architecture'));
     expect(within(project).getByText('Private repository')).toBeInTheDocument();
     expect(project.closest('#open-source')).toBeNull();
     expect(within(project).getAllByRole('link').some((link) => link.href.includes('github.com'))).toBe(false);
@@ -37,6 +41,46 @@ describe('professional portfolio', () => {
     );
     expect(within(project).queryByRole('link', { name: /Open diagram in full size/i })).not.toBeInTheDocument();
     expect(within(project).queryByRole('link', { name: /Download editable Excalidraw/i })).not.toBeInTheDocument();
+  });
+
+  test('shows one expose at a time, wraps navigation and updates the project link', () => {
+    render(<App />);
+    const carousel = screen.getByRole('region', { name: 'Project showcase' });
+    expect(within(carousel).getAllByRole('article')).toHaveLength(1);
+    expect(within(carousel).getByRole('heading', { name: 'Nova IPTV' })).toBeInTheDocument();
+    fireEvent.click(within(carousel).getByRole('button', { name: 'Previous project' }));
+    expect(within(carousel).getByRole('heading', { name: 'Sattari Automobile' })).toBeInTheDocument();
+    fireEvent.click(within(carousel).getByRole('button', { name: 'Next project' }));
+    expect(window.location.hash).toBe('#nova-iptv');
+    expect(within(carousel).getByRole('link', { name: 'Nova IPTV' })).toHaveAttribute('aria-current', 'true');
+  });
+
+  test('supports keyboard selection and resets screenshot and details when switching projects', () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole('button', { name: 'Live TV programme guide' }));
+    expect(screen.getByAltText(/Nova IPTV electronic programme guide/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText('About this project'));
+    expect(document.querySelector('#nova-iptv details')).toHaveAttribute('open');
+    const novaLink = screen.getByRole('link', { name: 'Nova IPTV' });
+    fireEvent.keyDown(novaLink, { key: 'ArrowRight' });
+    expect(screen.getByRole('link', { name: 'Beratungsstudio' })).toHaveFocus();
+    expect(screen.getByRole('heading', { name: 'Beratungsstudio' })).toBeInTheDocument();
+    fireEvent.keyDown(document.activeElement, { key: 'Home' });
+    expect(screen.getByRole('button', { name: 'Home and watch progress' })).toHaveAttribute('aria-pressed', 'true');
+    expect(document.querySelector('#nova-iptv details')).not.toHaveAttribute('open');
+  });
+
+  test('opens a direct project link and supports touch swipes without hijacking vertical scrolling', () => {
+    window.history.replaceState(null, '', '/#cafepos');
+    render(<App />);
+    expect(screen.getByRole('heading', { name: 'CaféPOS' })).toBeInTheDocument();
+    const slide = document.getElementById('project-slide');
+    fireEvent.touchStart(slide, { touches: [{ clientX: 250, clientY: 200 }] });
+    fireEvent.touchEnd(slide, { changedTouches: [{ clientX: 230, clientY: 70 }] });
+    expect(screen.getByRole('heading', { name: 'CaféPOS' })).toBeInTheDocument();
+    fireEvent.touchStart(slide, { touches: [{ clientX: 250, clientY: 200 }] });
+    fireEvent.touchEnd(slide, { changedTouches: [{ clientX: 100, clientY: 210 }] });
+    expect(screen.getByRole('heading', { name: /Cartyators/i })).toBeInTheDocument();
   });
 
   test('presents Options Workstation as an independent product with safe screenshots', () => {
