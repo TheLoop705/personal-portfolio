@@ -1,10 +1,70 @@
 import './RecentProjects.css';
 
 const projectIndex = [
+  { href: '#nova-iptv', label: 'Nova IPTV' },
+  { href: '#beratungsstudio', label: 'Beratungsstudio' },
+  { href: '#cafepos', label: 'CaféPOS' },
   { href: '#saas-autohandel', label: 'Cartyators' },
   { href: '#ekko', label: 'Ekko' },
   { href: '#grano-bar', label: 'Grano Bar' },
   { href: '#sattari-automobile', label: 'Sattari Automobile' },
+];
+
+const latestProjects = [
+  {
+    id: 'nova-iptv',
+    title: 'Nova IPTV',
+    category: 'Cross-platform streaming player',
+    intro: 'One player for the living room, desktop and phone.',
+    description: 'A shared TypeScript app for Fire TV, Android TV, Windows, iPhone, iPad and the web. Bring your own M3U playlist or Xtream Codes account to browse live TV, movies and series.',
+    stack: 'React Native · Expo · TypeScript · Electron · SQLite',
+    note: 'Screens show the built-in demo playlist and public test content. Nova ships no channels or subscriptions.',
+    screenshots: [
+      { src: '/projects/nova-iptv/home.webp', alt: 'Nova IPTV home with demo movies, resume progress and a remote-focused poster', caption: 'Home and watch progress', width: 1440, height: 860 },
+      { src: '/projects/nova-iptv/live-tv.webp', alt: 'Nova IPTV electronic programme guide with fictional demo channels, timeline and live preview', caption: 'Live TV programme guide', width: 1440, height: 860 },
+    ],
+    features: [
+      { title: 'Remote-first navigation', text: 'A shared focus and input system supports D-pad remotes, keyboard, mouse and touch across the entire app.' },
+      { title: 'Live TV and on-demand', text: 'An XMLTV programme guide, catch-up playback and live preview sit alongside movie libraries, series and saved watch progress.' },
+      { title: 'Platform-aware playback', text: 'ExoPlayer on TV, AVPlayer with VLC fallback on iOS, and browser playback on web and Windows. QR pairing lets a phone handle TV playlist setup.' },
+    ],
+    link: { href: 'https://github.com/TheLoop705/nova-iptv/releases', label: 'Download Nova' },
+  },
+  {
+    id: 'beratungsstudio',
+    title: 'Beratungsstudio',
+    category: 'Local-first consulting workspace',
+    intro: 'From the first proposal to the evidence behind the delivery.',
+    description: 'A single-user workspace for independent IT consulting: customers, versioned proposals, deliverables, time tracking and project budgets, with documents and notes in the same project context.',
+    stack: 'React · Python · FastAPI · SQLite · Tiptap · PDF.js',
+    note: 'Screenshot uses synthetic customers and documents. The Consulting Workspace is an optional feature.',
+    screenshots: [
+      { src: '/projects/beratungsstudio/workspace.webp', alt: 'Beratungsstudio consulting workspace with a synthetic architecture workshop, rich-text notes and two searchable PDF sources', caption: 'Project notes and source documents', width: 1440, height: 900 },
+    ],
+    features: [
+      { title: 'Versioned proposals', text: 'Create fixed-price or capped time-based proposals, freeze their contents on issue and generate PDFs. Accepted deliverables become trackable project work.' },
+      { title: 'Evidence beside the work', text: 'A project PDF library with immutable revisions, full-text search and two independent document views supports structured notes and automatic saving.' },
+      { title: 'Connected project tools', text: 'Track time and budget consumption, prepare invoice PDFs, and access the same consulting tools through the built-in assistant, CLI or MCP server.' },
+    ],
+  },
+  {
+    id: 'cafepos',
+    title: 'CaféPOS',
+    category: 'Android point of sale & web administration',
+    intro: 'A café till built around the work behind the counter.',
+    description: 'An Android checkout app and a multi-tenant administration workspace for small cafés. Product selection, payment, receipts and shift closing connect to a shared Go backend.',
+    stack: 'Kotlin · Android · Room · Go · PostgreSQL · Svelte · TypeScript',
+    note: 'In development. Screens show a lab build with training/simulated data. Hardware and provider acceptance are pending; no fiscal certification is claimed.',
+    screenshots: [
+      { src: '/projects/cafepos/sale.webp', alt: 'CaféPOS Android till in training mode with coffee product buttons, categories and a shopping basket', caption: 'Touch-first café checkout', width: 1279, height: 799 },
+      { src: '/projects/cafepos/payment.webp', alt: 'CaféPOS lab payment screen with a simulated cash sale, change calculation and a SumUp card payment option', caption: 'Payment flow in the simulator', width: 1279, height: 799 },
+    ],
+    features: [
+      { title: 'Resilient cash checkout', text: 'Local Room storage, a durable command queue and an outbox keep offline cash sales available and synchronize them when connectivity returns.' },
+      { title: 'Café operations', text: 'Large product targets, cash and card payment flows, receipt handling and shift closing support everyday counter work.' },
+      { title: 'Hardware integration', text: 'Dedicated adapters connect receipt printers and cash drawers. SumUp and TSE integrations currently run against simulators while hardware acceptance is pending.' },
+    ],
+  },
 ];
 
 const dealershipFeatures = [
@@ -78,13 +138,40 @@ export default function RecentProjects() {
         <p>Recent projects</p>
         <div>
           <h2 id="projects-title">From the API to the interface.</h2>
-          <p>Dealership software, native apps and websites for local businesses. A closer look at what I’ve been building.</p>
+          <p>Streaming across devices, a workspace for consultants and a café till, alongside dealership software and websites for local businesses.</p>
         </div>
       </header>
 
       <nav className="project-index" aria-label="Recent projects">
         {projectIndex.map((project) => <a key={project.href} href={project.href}>{project.label}</a>)}
       </nav>
+
+      {latestProjects.map((project) => (
+        <article className="recent-project latest-project" key={project.id} id={project.id} aria-labelledby={`${project.id}-title`}>
+          <header className="recent-project__header">
+            <div>
+              <p className="recent-project__category">{project.category}</p>
+              <h3 id={`${project.id}-title`}>{project.title}</h3>
+            </div>
+            <p className="recent-project__intro">{project.intro}</p>
+          </header>
+          <p className="recent-project__description">{project.description}</p>
+          <div className={`latest-project__gallery${project.screenshots.length === 1 ? ' latest-project__gallery--single' : ''}`} role="group" aria-label={`${project.title} screenshots`}>
+            {project.screenshots.map((screenshot) => <Screenshot key={screenshot.src} {...screenshot} />)}
+          </div>
+          <div className="project-features">
+            {project.features.map((feature) => (
+              <div key={feature.title}>
+                <h4>{feature.title}</h4>
+                <p>{feature.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="recent-project__stack">{project.stack}</p>
+          <p className="recent-project__note">{project.note}</p>
+          {project.link && <div className="work-entry__links"><ExternalLink href={project.link.href}>{project.link.label}</ExternalLink></div>}
+        </article>
+      ))}
 
       <article className="recent-project dealership-project" id="saas-autohandel" aria-labelledby="dealership-title">
         <header className="recent-project__header">

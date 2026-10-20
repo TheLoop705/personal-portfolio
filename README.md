@@ -4,7 +4,9 @@ A focused, one-page portfolio positioning Sultan Dayani around technical leaders
 
 ## Project imagery
 
-The recent-project section features Cartyators (`saas-autohandel`), Ekko, Grano Bar
+The recent-project section leads with Nova IPTV, Beratungsstudio and CaféPOS,
+including real app screenshots and three feature highlights per project.
+It also features Cartyators (`saas-autohandel`), Ekko, Grano Bar
 and Sattari Automobile, alongside the existing Options Workstation, PAIA and Pulse
 work. Screenshots were sourced from current Windows and Mac mini checkouts; the
 website previews show local versions, which may differ from their public deployments.

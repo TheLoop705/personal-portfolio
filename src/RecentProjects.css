@@ -171,6 +171,26 @@
   margin-top: 34px;
 }
 
+.latest-project > .recent-project__description {
+  max-width: 78ch;
+  margin: 0 0 28px;
+}
+
+.latest-project__gallery {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.latest-project__gallery--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.latest-project .work-entry__links {
+  margin-top: 18px;
+}
+
 .project-features h4 {
   font-family: var(--display);
   font-size: 1rem;
@@ -344,6 +364,7 @@
   }
 
   .recent-project__header,
+  .latest-project__gallery,
   .project-details__gallery,
   .ekko-project,
   .website-projects {
